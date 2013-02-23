@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<stations>
+  <station>
+    <name>乘风小区</name>
+    <lat>29.231175</lat>
+    <lng>115.799997</lng>
+    <line>2,3</line>
+    <date>1353570819000</date>
+  </station>
+
+  <station>
+    <name>南昌大学</name>
+    <lat>29.234667</lat>
+    <lng>115.803318</lng>
+    <line>2,3</line>
+    <date>1353571064000</date>
+  </station>
+
+  <station>
+    <name>南大红绿灯</name>
+    <lat>29.236136</lat>
+    <lng>115.804017</lng>
+    <line>1,2,3</line>
+    <date>1353571349000</date>
+  </station>
+
+  <station>
+    <name>耀邦红军小学</name>
+    <lat>29.239166</lat>
+    <lng>115.803714</lng>
+       <line>1,2,3</line>
+    <date>1353571592000</date>
+  </station>
+
+  <station>
+    <name>工商局</name>
+    <lat>29.241912</lat>
+    <lng>115.803004</lng>
+       <line>1,2,3</line>
+    <date>1353571912000</date>
+  </station>
+
+  <station>
+    <name>金贸广场</name>
+    <lat>29.245649</lat>
+    <lng>115.802231</lng>
+       <line>1,2,3</line>
+    <date>1353572318000</date>
+  </station>
+
+  <station>
+    <name>共青中心城</name>
+    <lat>29.248277</lat>
+    <lng>115.801255</lng>
+       <line>1,2,3</line>
+    <date>1353572603000</date>
+  </station>
+
+  <station>
+    <name>中国银行</name>
+    <lat>29.251212</lat>
+    <lng>115.800255</lng>
+       <line>1,2,3</line>
+    <date>1353572911000</date>
+  </station>
+
+  <station>
+    <name>财政局</name>
+    <lat>29.252503</lat>
+    <lng>115.798969</lng>
+       <line>1,2,3</line>
+    <date>1353573435000</date>
+  </station>
+
+  <station>
+    <name>汽车站</name>
+    <lat>29.253424</lat>
+    <lng>115.793219</lng>
+       <line>1,2,3</line>
+    <date>1353573625000</date>
+  </station>
+
+  <station>
+    <name>天湖丽都</name>
+    <lat>29.253510</lat>
+    <lng>115.785898</lng>
+       <line>1,2,3</line>
+    <date>1353574075000</date>
+  </station>
+  <station>
+
+    <name>甘露寺</name>
+    <lat>29.253434</lat>
+    <lng>115.776345</lng>
+       <line>1,2,3</line>
+    <date>1353574333000</date>
+  </station>
+
+  <station>
+    <name>行政服务中心</name>
+    <lat>29.253555</lat>
+    <lng>115.770331</lng>
+       <line>1,2,3</line>
+    <date>1353574561000</date>
+  </station>
+
+  <station>
+    <name>甘露镇</name>
+    <lat>29.253384</lat>
+    <lng>115.766083</lng>
+       <line>1,2</line>
+    <date>1353574679000</date>
+  </station>
+
+  <station>
+    <name>高速路口</name>
+    <lat>29.252710</lat>
+    <lng>115.760721</lng>
+       <line>1,2</line>
+    <date>1353574812000</date>
+  </station>
+
+  <station>
+    <name>合盛壹中心</name>
+    <lat>29.250549</lat>
+    <lng>115.754004</lng>
+       <line>1,2</line>
+    <date>1353575000000</date>
+  </station>
+
+  <station>
+    <name>金松路口A</name>
+    <lat>29.241412</lat>
+    <lng>115.756952</lng>
+       <line>1,2</line>
+    <date>1353575304000</date>
+  </station>
+
+  <station>
+    <name>恒奥国际城1</name>
+    <lat>29.247596</lat>
+    <lng>115.754507</lng>
+       <line>1,2</line>
+    <date>1353575547000</date>
+  </station>
+
+  <station>
+    <name>锦兴纺织</name>
+    <lat>29.251094</lat>
+    <lng>115.752911</lng>
+       <line>1,2</line>
+    <date>1353575810000</date>
+  </station>
+
+  <station>
+    <name>规划馆</name>
+    <lat>29.255372</lat>
+    <lng>115.751036</lng>
+       <line>1,2</line>
+    <date>1353575924000</date>
+  </station>
+  <station>
+    <name>鸭鸭产业园</name>
+    <lat>29.270709</lat>
+    <lng>115.747009</lng>
+       <line>1,2</line>
+    <date>1353576156000</date>
+  </station>
+  <!--<station>
+    <name>检测站</name>
+    <lat>29.274167</lat>
+    <lng>115.747088</lng>
+    <date>1353576256000</date>
+  </station>-->
+
+  <station>
+    <name>长江啤酒厂</name>
+    <lat>29.262132</lat>
+    <lng>115.747778</lng>
+       <line>1,2</line>
+    <date>1353576527000</date>
+  </station>
+
+  <station>
+    <name>火车站</name>
+    <lat>29.245591</lat>
+    <lng>115.770382</lng>
+       <line>3</line>
+    <date>1353577377000</date>
+  </station>
+
+  <station>
+    <name>邦华苑</name>
+    <lat>29.253273</lat>
+    <lng>115.789764</lng>
+       <line>1,2,3</line>
+    <date>1353577915000</date>
+  </station>
+
+  <station>
+    <name>烟草公司路口</name>
+    <lat>29.252682</lat>
+    <lng>115.796593</lng>
+       <line>1,2,3</line>
+    <date>1353578109000</date>
+  </station>
+
+  <station>
+    <name>人民医院</name>
+    <lat>29.234445</lat>
+    <lng>115.807404</lng>
+       <line>1</line>
+    <date>1353650276000</date>
+  </station>
+  <station>
+    <name>中航城</name>
+    <lat>29.234753</lat>
+    <lng>115.819719</lng>
+       <line>1</line>
+    <date>1353651576000</date>
+  </station>
+
+</stations>
