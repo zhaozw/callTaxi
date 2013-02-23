@@ -276,25 +276,24 @@
     
     if (len < MESSAGE_HEAD_LENGTH || realData[0] != 0x7e || realData[len - 1] != 0x7e)
     {
-        return NO;
         NSLog(@"JudgeisCompleteData --NO1");
+        return NO;
     }
 
     int recedataLegth =  [self GetMessageLengthInMessageHead:data]; 
     if (recedataLegth != len - MESSAGE_HEAD_LENGTH)
     {
-        return NO;
         NSLog(@"JudgeisCompleteData --NO2");
-
+        return NO;
     }
     NSData *messageHeadAndBoyd = [data subdataWithRange:NSMakeRange(1, data.length-3)];
     Byte checkByte = [self GetCheckByte:messageHeadAndBoyd];
     if (checkByte != realData[len - 2])
     {
-        return NO;
         NSLog(@"JudgeisCompleteData --NO3");
-
+        return NO;
     }
+    
     return true;
 }
 
