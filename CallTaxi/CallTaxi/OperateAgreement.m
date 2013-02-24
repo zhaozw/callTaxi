@@ -39,16 +39,16 @@
         
         if ([phoneNumberHead isEqualToString:@"130"]||[phoneNumberHead isEqualToString:@"131"]||[phoneNumberHead isEqualToString:@"132"]||[phoneNumberHead isEqualToString:@"145"]||[phoneNumberHead isEqualToString:@"155"]||[phoneNumberHead isEqualToString:@"156"]||[phoneNumberHead isEqualToString:@"185"]||[phoneNumberHead isEqualToString:@"186"])
         {
-            taxiServerHost = @"gqcl.cityofcar.com";
+            taxiServerHost = SERVER_ADDRESS_JIUJIANG_L; 
         }
         else
         {
-            taxiServerHost = @"gqcd.cityofcar.com";
+            taxiServerHost = SERVER_ADDRESS_JIUJIANG_D;
         }
     }
     else  //占时这样写。
     {
-        return @"wh.cityofcar.com";
+        return SERVER_ADDRESS_WUHAN;
     }
 
     
@@ -89,7 +89,6 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *cityName = [ud valueForKey:SERVER_CITY_NAME];
-
     if (cityName.length == 0)
     {
         cityName = @"九江市";
@@ -137,7 +136,7 @@
     NSInteger range = [ud integerForKey:SEARCHTAXI_RANGE];
     if (range == 0)
     {
-        range = 30;
+        range = 5;
     }
     return range;
 }
@@ -190,6 +189,22 @@
     NSData *sendData = [self PackageSendData:messageHead];
     return sendData;
 
+}
+
++ (NSData *)GetUpdataReferrerData:(NSString *)name
+{
+    
+    NSMutableData *searchTaxiData = [[NSMutableData alloc] init];
+    
+    
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000);
+    NSData *bodyData = [name dataUsingEncoding:enc];
+    
+    NSData *messageHead =[self GetMessageHeadWhitPhoneNumber:[self UserPhoneNumber] andMessageID:MESSAGE_ID_UpdataReferrer andMessageBodyLength:bodyData.length];
+    [searchTaxiData appendData:messageHead];
+    [searchTaxiData appendData:bodyData];
+    NSData *sendData = [self PackageSendData:searchTaxiData];
+    return sendData;
 }
 
 

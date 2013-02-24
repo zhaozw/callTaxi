@@ -9,15 +9,22 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SettingViewController.h"
 #import "SVWebViewController.h"
+#import "AsyncUdpSocket.h"
 #import "OperateAgreement.h"
 #import "SGInfoAlert.h"
 #import "Common.h"
 
-@interface SettingViewController ()<MFMailComposeViewControllerDelegate>
+@interface SettingViewController ()<MFMailComposeViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+
 
 @property (strong,nonatomic) UIAlertView *phoneNumberAlertView;
 @property (strong,nonatomic) UIAlertView *referrerAlertView;
+@property (strong,nonatomic) NSArray *pickerData;
+@property (strong,nonatomic) AsyncUdpSocket *socket;
+@property (strong,nonatomic) UIActionSheet *serverCitySelectActionSheet;
 
+@property (weak, nonatomic) IBOutlet UILabel *rangeLable;
+@property (weak, nonatomic) IBOutlet UISlider *rangeSlider;
 
 @end
 
@@ -25,6 +32,69 @@
 
 @synthesize phoneNumberAlertView = _phoneNumberAlertView;
 @synthesize referrerAlertView = _referrerAlertView;
+@synthesize socket = _socket;
+@synthesize pickerData = _pickerData;
+@synthesize serverCitySelectActionSheet = _serverCitySelectActionSheet;
+
+
+- (UIActionSheet *)serverCitySelectActionSheet
+{
+    if (_serverCitySelectActionSheet == nil)
+    {
+        _serverCitySelectActionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:nil
+                                         cancelButtonTitle:nil
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:nil];
+        
+        [_serverCitySelectActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+        
+        CGRect pickerFrame = CGRectMake(0, 40, 0, 0);
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:pickerFrame];
+        pickerView.showsSelectionIndicator = YES;
+        pickerView.dataSource = self;
+        pickerView.delegate = self;
+        
+        [_serverCitySelectActionSheet addSubview:pickerView];
+        
+        UISegmentedControl *closeButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:@"确定"]];
+        closeButton.momentary = YES;
+        closeButton.frame = CGRectMake(260, 7.0f, 50.0f, 30.0f);
+        closeButton.segmentedControlStyle = UISegmentedControlStyleBar;
+        closeButton.tintColor = [UIColor blackColor];
+        [closeButton addTarget:self action:@selector(dismissActionSheet:) forControlEvents:UIControlEventValueChanged];
+        [_serverCitySelectActionSheet addSubview:closeButton];
+        
+        //[_serverCitySelectActionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+        
+        //[_serverCitySelectActionSheet setBounds:CGRectMake(0, 0, 320, 485)];
+    }
+    return _serverCitySelectActionSheet;
+}
+
+
+- (NSArray *)pickerData
+{
+    if (_pickerData == nil)
+    {
+        _pickerData = [[NSArray alloc]initWithObjects:@"九江市",@"武汉市", nil];
+    }
+    return _pickerData;
+}
+
+- (AsyncUdpSocket *)socket
+{
+    if (_socket == nil)
+    {
+        _socket = [[AsyncUdpSocket alloc] initIPv4];
+        _socket.delegate = self;
+        _socket.maxReceiveBufferSize = 100;
+        [self.socket receiveWithTimeout:-1 tag:0];
+    }
+    return _socket;
+}
+
 
 //------------const tag
 const int phoneNumberAlertViewTag =100;
@@ -74,10 +144,13 @@ const int referrerAlertViewTextFieldTag =103;
     [super viewDidLoad];
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void)viewDidUnload
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.socket = nil;
+    [self setRangeLable:nil];
+    [self setRangeSlider:nil];
+    [super viewDidUnload];
 }
 
 #pragma mark - Table view data source
@@ -107,7 +180,8 @@ const int referrerAlertViewTextFieldTag =103;
         }
         if (indexPath.row == 1)
         {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"搜索范围（公里）：%d",[OperateAgreement Range]];
+            self.rangeLable.text = [NSString stringWithFormat:@"%d公里",[OperateAgreement Range]];
+            self.rangeSlider.value = [OperateAgreement Range];
         }
         if (indexPath.row == 2)
         {
@@ -126,13 +200,27 @@ const int referrerAlertViewTextFieldTag =103;
 
     }
 }
-#pragma mark - Table view delegate
+#pragma mark  Table view delegate
+
+- (void)dismissActionSheet:(UIActionSheet *)sender
+{
+    [self.serverCitySelectActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 2)
+    if (indexPath.section == 0 )
     {
-        [self.phoneNumberAlertView show];
+        if (indexPath.row == 0)
+        {
+            [self.serverCitySelectActionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+            [self.serverCitySelectActionSheet setBounds:CGRectMake(0, 0, 320, 485)];            
+        }
+
+        if (indexPath.row == 2)
+        {
+            [self.phoneNumberAlertView show];
+        }
     }
 
     if (indexPath.section == 1)
@@ -214,6 +302,8 @@ const int referrerAlertViewTextFieldTag =103;
         
         [OperateAgreement SetReferrer:peopleName];
         [self.tableView reloadData];
+        NSData * data = [OperateAgreement GetUpdataReferrerData:peopleName];
+        [self sendData:data];
 
     }
     
@@ -244,5 +334,130 @@ const int referrerAlertViewTextFieldTag =103;
     }
     [self dismissModalViewControllerAnimated:YES];
 }
+
+
+#pragma mark - Range Slider Value Change
+- (IBAction)RangeSliderValueChange:(UISlider *)sender
+{
+    int discreteValue = roundl([sender value]); // Rounds float to an integer
+    [sender setValue:(float)discreteValue];
+    [OperateAgreement SetRange:discreteValue];
+    self.rangeLable.text = [NSString stringWithFormat:@"%d公里",discreteValue];
+}
+
+#pragma mark - Picker Date Source Methods
+
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [self.pickerData count];
+}
+
+#pragma mark Picker Delegate Methods
+
+
+-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [self.pickerData objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *serverCityName = [self.pickerData objectAtIndex:row];
+    [OperateAgreement SetServerCityName:serverCityName];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"当前城市：%@",serverCityName];
+
+}
+
+
+#pragma mark - UDP Delegate
+
+- (void)sendData:(NSData * )data
+{
+    if (![Common isExistenceNetwork])
+    {
+        return;
+    }
+    if ([OperateAgreement UserPhoneNumber].length == 0)
+    {
+        return;
+    }
+    [self.socket sendData:data toHost:[OperateAgreement TaxiServerHost] port:UDP_TAXI_SERVER_PORT  withTimeout:1 tag:0];
+    
+    
+}
+
+//UDP接收消息
+- (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port
+{
+    //---------Log
+    NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
+    NSLog(@"%@",info);
+    //启动监听下一条消息
+    [self.socket receiveWithTimeout:-1 tag:0];
+    
+    BOOL isMessageStart = NO;
+    
+    NSMutableData *receData = [[NSMutableData alloc] init];
+    for (int i = 0; i < data.length; i++)
+    {
+        Byte tmp = -1;
+        [data getBytes:&tmp range:NSMakeRange(i, 1)];
+        if (tmp == 0x7e)
+        {
+            isMessageStart = !isMessageStart;
+        }
+        if (isMessageStart)
+        {
+            [receData appendBytes:&tmp length:sizeof(Byte)];
+        }
+        if (isMessageStart == NO && tmp == 0x7e)
+        {
+            [receData appendBytes:&tmp length:sizeof(Byte)];
+            NSData *oneMessage = [receData copy];
+            receData.length = 0 ;
+            NSData *realOneMessage =[OperateAgreement RestoreReceData:oneMessage];
+            NSString *messageID = [OperateAgreement GetMessageIdInMessageHead:realOneMessage];
+            NSLog(@"%@",messageID);
+        }
+    }
+    
+
+    
+    
+    return YES;
+}
+
+- (void)onUdpSocket:(AsyncUdpSocket *)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError *)error
+{
+    NSLog(@"Message not received for error: %@", error);
+    self.socket = nil;
+}
+
+- (void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
+{
+    NSLog(@"Message not send for error: %@",error);
+    self.socket = nil;
+}
+
+- (void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag
+{
+    NSLog(@"Message send success!");
+}
+
+- (void)onUdpSocketDidClose:(AsyncUdpSocket *)sock
+{
+    self.socket = nil;
+    NSLog(@"socket closed!");
+}
+
+
 
 @end

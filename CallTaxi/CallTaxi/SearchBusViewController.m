@@ -41,7 +41,7 @@
     {
         _socket = [[AsyncUdpSocket alloc] initIPv4];
         _socket.delegate = self;
-        _socket.maxReceiveBufferSize = 5000;
+        _socket.maxReceiveBufferSize = 1000;
         //绑定端口
         //NSError *error = nil;
         // [self.socket bindToPort:UDP_SEND_PORT error:&error];
@@ -64,7 +64,7 @@
 }
 
 
-#pragma mark View Lifecycle
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
@@ -101,20 +101,19 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+
+- (void)viewDidAppear:(BOOL)animated
 {
-    
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     if (_searchBusTimer == nil)
     {
         [self.searchBusTimer fire];
     }
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     [self.searchBusTimer invalidate];
     self.searchBusTimer = nil;
     self.socket = nil;
@@ -131,7 +130,7 @@
 }
 
 
-#pragma mark searchBusThread
+#pragma mark - SearchBusThread
 
 -(void)searchBusThread:(NSTimer *)theTimer
 {
@@ -139,7 +138,7 @@
     
 }
 
-#pragma mark UDP Delegate
+#pragma mark - UDP Delegate
 
 - (void)sendData:(NSData * )data
 {
@@ -152,10 +151,7 @@
         NSLog(@"UserPhoneNumber =0");
         return;
     }
-    if (self.socket != nil)
-    {
-        [self.socket sendData:data toHost:[OperateAgreement BusServerHost] port:UDP_BUS_SERVER_PORT  withTimeout:1 tag:0];
-    }
+    [self.socket sendData:data toHost:[OperateAgreement BusServerHost] port:UDP_BUS_SERVER_PORT  withTimeout:1 tag:0];
     
 }
 
@@ -307,7 +303,7 @@
 }
 
 
-#pragma mark showBusStationName
+#pragma mark - Show BusStationName
 
 
 - (IBAction)showBusStationName:(UIBarButtonItem *)sender
@@ -332,7 +328,7 @@
 }
 
 
-#pragma mark InitializationMapView
+#pragma - mark InitializationMapView
 
 
 - (void)initializationMapView
@@ -442,7 +438,7 @@
 
 
 
-#pragma mark MKMapView Delegate
+#pragma mark - MKMapView Delegate
 
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation

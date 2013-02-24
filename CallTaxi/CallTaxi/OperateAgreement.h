@@ -21,6 +21,8 @@
 #define MESSAGE_ID_UPLoadTrade_REPLY     @"8B02"
 #define MESSAGE_ID_GetAllBus             @"0001"
 #define MESSAGE_ID_GetAllBus_REPLY       @"8001"
+#define MESSAGE_ID_UpdataReferrer        @"0025"
+#define MESSAGE_ID_UpdataReferrer_REPLY  @"8025"
 
 
 //----------Config
@@ -43,6 +45,8 @@
 
 #define SERVER_ADDRESS_JIUJIANG_D        @"gqcd.cityofcar.com"
 #define SERVER_ADDRESS_JIUJIANG_L        @"gqcl.cityofcar.com"
+#define SERVER_ADDRESS_WUHAN             @"wh.cityofcar.com"
+
 
 #define COMPANY_WEBSITE                  @"http://www.cityofcar.com"
 
@@ -63,6 +67,8 @@
 + (NSData *)GetSearchTaxiDataWithLatitude:(double)latitude andLongitude:(double)longitude range:(Byte)range;
 
 + (NSData *)GetAllBusData;
+
++ (NSData *)GetUpdataReferrerData:(NSString *)name;
 
 + (NSData *)RestoreReceData:(NSData *)receData;
 

@@ -35,7 +35,6 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIButton *currentPostionButton;
-@property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) AsyncUdpSocket *socket;
 @property (strong,nonatomic) UIActivityIndicatorView *spinner;
 @property (strong,nonatomic) UIAlertView *phoneNumberAlertView;
@@ -51,14 +50,13 @@
 
 @synthesize currentPostionButton = _currentPostionButton;
 @synthesize mapView = _mapView;
-@synthesize locationManager = _locationManager;
 @synthesize spinner = _spinner;
 @synthesize socket = _socket;
 @synthesize phoneNumberAlertView = _phoneNumberAlertView;
 @synthesize taxiList = _taxiList;
 @synthesize audioPlayer = _audioPlayer;
 
-#pragma mark  property
+#pragma mark - property
 
 
 
@@ -88,17 +86,6 @@
     return _spinner;
 }
 
-- (CLLocationManager *)locationManager
-{
-    if (_locationManager == nil)
-    {
-        _locationManager = [[CLLocationManager alloc] init];//创建位置管理器
-        _locationManager.delegate = self;//设置代理
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;//指定需要的精度级别
-        _locationManager.distanceFilter =  1000;//设置距离筛选器
-    }
-    return _locationManager;
-}
 
 - (UIAlertView *)phoneNumberAlertView
 {
@@ -115,8 +102,7 @@
     }
     return  _phoneNumberAlertView;
 }
-
-#pragma mark View Lifecycle
+#pragma mark - View Lifecycle
 
 
 - (void)viewDidLoad
@@ -138,17 +124,11 @@
     //  check LocationManager
     if ([CLLocationManager locationServicesEnabled])
     {
-        [self.locationManager startUpdatingLocation];//启动位置管理器
         [self.spinner startAnimating];
         getCurrentPostioning = YES;
-
     }
     else
     {
-        //        UIAlertView * alertA= [[UIAlertView alloc] initWithTitle:@"" message:@"请在设置里面打开您的定位服务"
-        //                                                        delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        //        [alertA show];
-        
         [self.spinner stopAnimating];
         [self.mapView setUserTrackingMode: MKUserTrackingModeNone animated: NO];
         UIImage *buttonArrow = [UIImage imageNamed:@"LocationGrey.png"];
@@ -191,7 +171,7 @@
     }
 }
 
-#pragma mark segue to ListMode
+#pragma mark Segue to ListMode
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -212,7 +192,7 @@
     }
 }
 
-#pragma mark UDP Delegate
+#pragma mark - UDP Delegate
 
 - (void)sendData:(NSData * )data
 {
@@ -231,11 +211,7 @@
     {
         return;
     }
-    if (self.socket != nil)
-    {
-        [self.socket sendData:data toHost:[OperateAgreement TaxiServerHost] port:UDP_TAXI_SERVER_PORT  withTimeout:1 tag:0];
-    }
-    //sleep(5);
+    [self.socket sendData:data toHost:[OperateAgreement TaxiServerHost] port:UDP_TAXI_SERVER_PORT  withTimeout:1 tag:0];
     
 }
 
@@ -456,7 +432,7 @@
                 CLLocation *cl2  =[[ CLLocation alloc] initWithLatitude:userLatitude longitude:userLongitude];
                 CLLocationDistance distance = [cl1 distanceFromLocation:cl2];
                 taxiInfo.distanceFromUser = distance;
-            }            
+            }
             
             [taxiListTmp addObject:taxiInfo];
             
@@ -508,8 +484,7 @@
 
 
 
-
-#pragma mark SearchTaxi
+#pragma mark - SearchTaxi
 
 
 - (IBAction)searchTaxi:(id)sender
@@ -581,8 +556,28 @@
     trySearchTaxiCount ++;
 }
 
-#pragma mark UserPhoneNumber AlertView
 
+
+#pragma mark - Initialization MapView、CurrentPostionButton
+
+- (void)InitializationConfig
+{
+    
+    // Initialization MapView、CurrentPostionButton
+    [self InitializationMapView];
+    [self InitializationCurrentPostionButton];
+    
+    NSLog(@"%@",[OperateAgreement UserPhoneNumber]);
+    NSLog(@"%@",[OperateAgreement TaxiServerHost]);
+
+    if ([OperateAgreement UserPhoneNumber].length == 0)
+    {
+        [self.phoneNumberAlertView show];
+    }
+    
+    
+}
+#pragma mark UserPhoneNumber AlertView
 
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -606,25 +601,6 @@
             self.phoneNumberAlertView = nil;
             [self.phoneNumberAlertView show];
         }
-    }
-    
-    
-}
-
-
-#pragma mark Initialization MapView、CurrentPostionButton
-
-- (void)InitializationConfig
-{
-    
-    // Initialization MapView、CurrentPostionButton
-    [self InitializationMapView];
-    [self InitializationCurrentPostionButton];
-    
-    NSLog(@"%@",[OperateAgreement UserPhoneNumber]);
-    if ([OperateAgreement UserPhoneNumber].length == 0)
-    {
-        [self.phoneNumberAlertView show];
     }
     
     
@@ -669,7 +645,7 @@
     
     //Configure the button
     self.currentPostionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.currentPostionButton addTarget:self action:@selector(startShowingUserHeading:) forControlEvents:UIControlEventTouchUpInside];
+    [self.currentPostionButton addTarget:self action:@selector(showUeserLocationOnMapView:) forControlEvents:UIControlEventTouchUpInside];
     //Add state images
     [self.currentPostionButton setBackgroundImage:[Common currentPostionBtnImgGreyButtonHighlight] forState:UIControlStateNormal];
     [self.currentPostionButton setBackgroundImage:[Common currentPostionBtnImgGreyButton] forState:UIControlStateHighlighted];
@@ -692,7 +668,7 @@
     
 }
 
-- (IBAction) startShowingUserHeading:(id)sender
+- (IBAction) showUeserLocationOnMapView:(id)sender
 {
     if (self.spinner.isAnimating)
     {
@@ -734,7 +710,7 @@
     
 }
 
-#pragma mark MKMapView Delegate
+#pragma mark - MKMapView Delegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -797,20 +773,6 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    //    TaxiInfo *taxiInfo = view.annotation;
-    //    NSLog(@"%f",taxiInfo.distanceFromUser);
-    //    //NSLog(@" didSelectAnnotationView");
-    //
-    //    if ([view.annotation isKindOfClass:[TaxiInfo class]])
-    //    {
-    //        TaxiInfo *taxiInfo = view.annotation;
-    //        NSData *sendData = [OperateAgreement GetSendTransactionData:taxiInfo.phoneNumber];
-    //        [self sendData:sendData];
-    //    }
-    //    else
-    //    {
-    //        NSLog(@"no  taxiclass didSelectAnnotationView");
-    //    }
     return;
 }
 
@@ -840,6 +802,9 @@
     if (isGetUserLocation == NO)
     {
         isGetUserLocation = YES;
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud setObject:[NSString stringWithFormat:@"%f",userLocation.coordinate.latitude] forKey:LAST_UESRLOCATION_LATITUDE];
+        [ud setObject:[NSString stringWithFormat:@"%f",userLocation.coordinate.longitude] forKey:LAST_UESRLOCATION_LONGITUDE];
     }
     if(getCurrentPostioning)
     {
@@ -862,7 +827,6 @@
     {
         if (getCurrentPostioning)
         {
-            NSLog(@"drag ended");
             [self.spinner stopAnimating];
             getCurrentPostioning = FALSE;
             [self.mapView setUserTrackingMode: MKUserTrackingModeNone animated: NO];
@@ -874,58 +838,6 @@
 
 
 
-
-#pragma mark CLLocationManager Delegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    [self.locationManager stopUpdatingLocation];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.latitude] forKey:LAST_UESRLOCATION_LATITUDE];
-    [ud setObject:[NSString stringWithFormat:@"%f",newLocation.coordinate.longitude] forKey:LAST_UESRLOCATION_LONGITUDE];
-    
-    
-    //    NSLog(@"%f",newLocation.verticalAccuracy);
-    //    NSLog(@"%f",newLocation.horizontalAccuracy);
-    
-    NSLog(@"%f,%f",newLocation.coordinate.latitude - self.mapView.userLocation.coordinate.latitude
-          ,newLocation.coordinate.longitude - self.mapView.userLocation.coordinate.longitude);
-}
-
-
-
-//当设备无法定位当前我位置时候调用此方法
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSString *errorType = (error.code == kCLErrorDenied)?@"Access Denied" : @"Unknown Error";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error getting Location"
-                                                    message:errorType
-                                                   delegate:nil
-                                          cancelButtonTitle:@"oKay"
-                                          otherButtonTitles: nil];
-    [self.spinner stopAnimating];
-    [alert show];
-}
-
-
-
-//#pragma mark - 摇一摇
-//
-//
-//- (BOOL) canBecomeFirstResponder
-//{
-//    return YES;
-//}
-//
-//
-//- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
-//{
-//    if (motion == UIEventSubtypeMotionShake)
-//    {
-//        [self PlayShakeMusic];
-//        [self searchTaxi:nil];
-//    }
-//}
 
 #pragma mark - 摇一摇
 static SystemSoundID soundIDTest = 0;
@@ -977,7 +889,7 @@ static SystemSoundID soundIDTest = 0;
 //- (void)
 
 
-#pragma mark - 实现摇一摇播放声音方法
+#pragma mark 实现摇一摇播放声音方法
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player
                        successfully:(BOOL)flag{
     
