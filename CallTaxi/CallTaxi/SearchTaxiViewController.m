@@ -469,7 +469,14 @@
             //29.705172,116.005516
             double userLatitude = self.mapView.userLocation.coordinate.latitude;
             double userLongitude = self.mapView.userLocation.coordinate.longitude;
-            if (userLongitude == 0 || userLatitude == 0)
+            
+            NSLog(@"%f,%f",self.mapView.userLocation.coordinate.latitude,self.mapView.userLocation.coordinate.longitude);
+            NSLog(@"%f,%f",self.mapView.userLocation.location.verticalAccuracy,self.mapView.userLocation.location.horizontalAccuracy);
+
+            if (userLongitude == 0 || userLatitude == 0
+                || self.mapView.userLocation.location.verticalAccuracy > 300
+                || self.mapView.userLocation.location.horizontalAccuracy > 300
+                )
             {
                 taxiInfo.distanceFromUser = 0;
             }
