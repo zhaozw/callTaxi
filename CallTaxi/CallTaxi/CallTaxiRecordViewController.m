@@ -82,8 +82,8 @@
     {
         cell = [[UITableViewCell alloc] init];
     }
-    
-    NSDictionary * recordDic = [self.callTaxiRecordList objectAtIndex:indexPath.row];
+
+    NSDictionary * recordDic = [self.callTaxiRecordList objectAtIndex:(self.callTaxiRecordList.count - 1 - indexPath.row)];
 
 
     {

@@ -55,7 +55,7 @@
         pickerView.showsSelectionIndicator = YES;
         pickerView.dataSource = self;
         pickerView.delegate = self;
-        
+        pickerView.tag = 100;
         [_serverCitySelectActionSheet addSubview:pickerView];
         
         UISegmentedControl *closeButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:@"确定"]];
@@ -200,12 +200,16 @@ const int referrerAlertViewTextFieldTag =103;
 
     }
 }
-#pragma mark  Table view delegate
+#pragma mark  serverCitySelectActionSheet delegate
 
-- (void)dismissActionSheet:(UIActionSheet *)sender
+- (void)dismissActionSheet:(id)sender
 {
     [self.serverCitySelectActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
+
+#pragma mark  Table view delegate
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -214,7 +218,10 @@ const int referrerAlertViewTextFieldTag =103;
         if (indexPath.row == 0)
         {
             [self.serverCitySelectActionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
-            [self.serverCitySelectActionSheet setBounds:CGRectMake(0, 0, 320, 485)];            
+            [self.serverCitySelectActionSheet setBounds:CGRectMake(0, 0, 320, 485)];
+            UIPickerView *pickerView = (UIPickerView *)[self.serverCitySelectActionSheet viewWithTag:100];
+            int value = [self.pickerData indexOfObject: [OperateAgreement ServerCityName]];        //someString 是我想让uipicerview自动选中的值
+            [pickerView selectRow:value inComponent:0 animated:NO];
         }
 
         if (indexPath.row == 2)
@@ -299,11 +306,15 @@ const int referrerAlertViewTextFieldTag =103;
         // ok button
         UITextField *textField = (UITextField *)[actionSheet viewWithTag:referrerAlertViewTextFieldTag];
         NSString *peopleName = textField.text;
-        
-        [OperateAgreement SetReferrer:peopleName];
-        [self.tableView reloadData];
-        NSData * data = [OperateAgreement GetUpdataReferrerData:peopleName];
-        [self sendData:data];
+    
+        if (![peopleName isEqualToString:[OperateAgreement Referrer]])
+        {
+            [OperateAgreement SetReferrer:peopleName];
+            [self.tableView reloadData];
+            NSData * data = [OperateAgreement GetUpdataReferrerData:peopleName];
+            [self sendData:data];
+        }
+
 
     }
     
@@ -389,6 +400,7 @@ const int referrerAlertViewTextFieldTag =103;
     {
         return;
     }
+    NSLog(@"%@",[OperateAgreement TaxiServerHost]);
     [self.socket sendData:data toHost:[OperateAgreement TaxiServerHost] port:UDP_TAXI_SERVER_PORT  withTimeout:1 tag:0];
     
     

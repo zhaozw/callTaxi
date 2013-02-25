@@ -434,7 +434,7 @@
         <scene sceneID="7qP-NN-v1n">
             <objects>
                 <navigationController id="6dO-Ls-UED" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="查出租车" id="Xdr-va-7s5"/>
+                    <tabBarItem key="tabBarItem" title="查出租车" image="taxi.png" id="Xdr-va-7s5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="np4-rO-I6o">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -453,7 +453,7 @@
         <scene sceneID="3MQ-CR-V1y">
             <objects>
                 <navigationController id="N2O-Ov-Peb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="查公交" id="Jta-ye-9kZ"/>
+                    <tabBarItem key="tabBarItem" title="查公交" image="bus.png" id="Jta-ye-9kZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iMj-L1-YYn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -472,7 +472,7 @@
         <scene sceneID="7ED-q8-xhW">
             <objects>
                 <navigationController id="td6-ZE-Kuk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="招车记录" id="VZw-8s-ber"/>
+                    <tabBarItem key="tabBarItem" title="招车记录" image="callTaxiRecord.png" id="VZw-8s-ber"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e8o-GD-0h8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -491,7 +491,7 @@
         <scene sceneID="mOd-8Q-dAg">
             <objects>
                 <navigationController id="LUH-zX-Q4h" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" id="YD3-nq-ODp"/>
+                    <tabBarItem key="tabBarItem" title="设置" image="setting.png" id="YD3-nq-ODp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eCe-ue-oKo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -507,6 +507,43 @@
             <point key="canvasLocation" x="-4046" y="159"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bus.png" width="30" height="30"/>
+        <image name="callTaxiRecord.png" width="30" height="30"/>
+        <image name="setting.png" width="30" height="30"/>
+        <image name="taxi.png" width="30" height="30"/>
+    </resources>
+    <classes>
+        <class className="CallTaxiRecordViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CallTaxiRecordViewController.h"/>
+        </class>
+        <class className="SearchBusViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchBusViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="SearchTaxiViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchTaxiViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="searchTaxi:"/>
+                <relationship kind="action" name="showUeserLocationOnMapView:"/>
+                <relationship kind="outlet" name="currentPostionButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="SettingViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="RangeSliderValueChange:" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="rangeLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rangeSlider" candidateClass="UISlider"/>
+            </relationships>
+        </class>
+        <class className="TaxiListModeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TaxiListModeViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

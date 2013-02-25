@@ -52,6 +52,14 @@
 		E52302DA16D8DB32003A89B3 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E52302D616D8DB32003A89B3 /* SVWebViewController.bundle */; };
 		E52302DB16D8DB32003A89B3 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E52302D816D8DB32003A89B3 /* SVWebViewController.m */; };
 		E523665C16C219F100463A4F /* SGInfoAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = E523665B16C219F100463A4F /* SGInfoAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E529293816DB4EA200F2D984 /* bus.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293416DB4EA200F2D984 /* bus.png */; };
+		E529293916DB4EA200F2D984 /* callTaxiRecord.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293516DB4EA200F2D984 /* callTaxiRecord.png */; };
+		E529293A16DB4EA200F2D984 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293616DB4EA200F2D984 /* setting.png */; };
+		E529293B16DB4EA200F2D984 /* taxi.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293716DB4EA200F2D984 /* taxi.png */; };
+		E529293D16DB4F0500F2D984 /* bus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293C16DB4F0500F2D984 /* bus@2x.png */; };
+		E529294216DB4F4D00F2D984 /* callTaxiRecord@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */; };
+		E529294316DB4F4D00F2D984 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529294016DB4F4D00F2D984 /* setting@2x.png */; };
+		E529294416DB4F4D00F2D984 /* taxi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529294116DB4F4D00F2D984 /* taxi@2x.png */; };
 		E53ADEB316C7717F00CE8596 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = E53ADEB016C7717F00CE8596 /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E53ADEB416C7717F00CE8596 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = E53ADEB216C7717F00CE8596 /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E5417F4916C89DBC004CB781 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = E5417F4816C89DBC004CB781 /* NSData+Hex.m */; };
@@ -149,6 +157,14 @@
 		E52302D816D8DB32003A89B3 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
 		E523665A16C219F100463A4F /* SGInfoAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGInfoAlert.h; sourceTree = "<group>"; };
 		E523665B16C219F100463A4F /* SGInfoAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGInfoAlert.m; sourceTree = "<group>"; };
+		E529293416DB4EA200F2D984 /* bus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bus.png; sourceTree = "<group>"; };
+		E529293516DB4EA200F2D984 /* callTaxiRecord.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callTaxiRecord.png; sourceTree = "<group>"; };
+		E529293616DB4EA200F2D984 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		E529293716DB4EA200F2D984 /* taxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taxi.png; sourceTree = "<group>"; };
+		E529293C16DB4F0500F2D984 /* bus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bus@2x.png"; sourceTree = "<group>"; };
+		E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callTaxiRecord@2x.png"; sourceTree = "<group>"; };
+		E529294016DB4F4D00F2D984 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		E529294116DB4F4D00F2D984 /* taxi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "taxi@2x.png"; sourceTree = "<group>"; };
 		E53ADEAF16C7717F00CE8596 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		E53ADEB016C7717F00CE8596 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		E53ADEB116C7717F00CE8596 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -350,6 +366,21 @@
 			name = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		E529293E16DB4F1B00F2D984 /* tabImage */ = {
+			isa = PBXGroup;
+			children = (
+				E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */,
+				E529294016DB4F4D00F2D984 /* setting@2x.png */,
+				E529294116DB4F4D00F2D984 /* taxi@2x.png */,
+				E529293C16DB4F0500F2D984 /* bus@2x.png */,
+				E529293416DB4EA200F2D984 /* bus.png */,
+				E529293516DB4EA200F2D984 /* callTaxiRecord.png */,
+				E529293616DB4EA200F2D984 /* setting.png */,
+				E529293716DB4EA200F2D984 /* taxi.png */,
+			);
+			name = tabImage;
+			sourceTree = "<group>";
+		};
 		E53ADEAE16C7716200CE8596 /* MacAddressMd5Value */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +500,7 @@
 		E567EBE216C110E900D2F0F2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E529293E16DB4F1B00F2D984 /* tabImage */,
 				E50FA99216D78006005FE832 /* on.m4r */,
 				E50FA98C16D763BB005FE832 /* glass.wav */,
 				E562168416C3A7D600950791 /* PostionButtonImage */,
@@ -601,6 +633,14 @@
 				E50FA98D16D763BB005FE832 /* glass.wav in Resources */,
 				E50FA99316D78006005FE832 /* on.m4r in Resources */,
 				E52302DA16D8DB32003A89B3 /* SVWebViewController.bundle in Resources */,
+				E529293816DB4EA200F2D984 /* bus.png in Resources */,
+				E529293916DB4EA200F2D984 /* callTaxiRecord.png in Resources */,
+				E529293A16DB4EA200F2D984 /* setting.png in Resources */,
+				E529293B16DB4EA200F2D984 /* taxi.png in Resources */,
+				E529293D16DB4F0500F2D984 /* bus@2x.png in Resources */,
+				E529294216DB4F4D00F2D984 /* callTaxiRecord@2x.png in Resources */,
+				E529294316DB4F4D00F2D984 /* setting@2x.png in Resources */,
+				E529294416DB4F4D00F2D984 /* taxi@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

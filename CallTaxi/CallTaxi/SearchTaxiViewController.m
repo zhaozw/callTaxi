@@ -25,12 +25,15 @@
 
 @interface SearchTaxiViewController ()<MKMapViewDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate,AVAudioPlayerDelegate>
 {
+    TaxiInfo *didSelectTaxiInfo;
     BOOL getCurrentPostioning;
     BOOL isLogining;
     BOOL isSearching;
     BOOL isSearched;
     BOOL isGetUserLocation;
+    BOOL isCalledTaxiPhone;
     int trySearchTaxiCount;
+    double clickCallphoneNumberBtnTimeMillis;
 }
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -59,7 +62,8 @@
 #pragma mark - property
 
 
-
+//const int phoneNumberAlertViewTag = 100;
+//const int isCalledTaxiPhoneTag = 101;
 
 - (AsyncUdpSocket *)socket
 {
@@ -94,7 +98,7 @@
         _phoneNumberAlertView = [[UIAlertView alloc] initWithTitle:@"请输入本机号码" message:nil delegate:self
                                                  cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         _phoneNumberAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        _phoneNumberAlertView.tag = 100;
+        _phoneNumberAlertView.tag = 100;//phoneNumberAlertViewTag;
         UITextField *textField = [_phoneNumberAlertView textFieldAtIndex:0];
         textField.tag = 101;
         textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -109,6 +113,7 @@
 {
     
     [super viewDidLoad];
+    
     
     [self InitializationConfig];
     isGetUserLocation = NO;
@@ -138,6 +143,36 @@
 }
 
 
+- (void)handleWillResignActive
+{
+
+    double currentTimeMillis = [[NSDate date] timeIntervalSince1970]; //* 1000;
+    double dvalue = currentTimeMillis - clickCallphoneNumberBtnTimeMillis;
+    NSLog(@"dvalue --111111--- : %f", dvalue);
+    //占时这样判断。
+    if (dvalue > 1 && dvalue < 10)
+    {
+        isCalledTaxiPhone = YES;
+    }
+}
+
+- (void)handleDidBecomeActive
+{
+
+    if (isCalledTaxiPhone)
+    {
+        isCalledTaxiPhone = NO;
+         NSString *info = [NSString stringWithFormat:@"是否招车成功？"];
+         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:info
+                                   delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        
+        alertView.tag = 101;//isCalledTaxiPhoneTag;
+        [alertView show];
+    }
+}
+
+
+
 - (void)viewDidUnload {
     self.socket = nil;
     [self setMapView:nil];
@@ -149,10 +184,21 @@
 {
     [super viewDidAppear:animated];
     [self becomeFirstResponder];
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(handleWillResignActive)
+                                                 name: UIApplicationWillResignActiveNotification
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(handleDidBecomeActive)
+                                                 name: UIApplicationDidBecomeActiveNotification
+                                               object: nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [self resignFirstResponder];
     [super viewDidDisappear:animated];
 }
@@ -178,6 +224,7 @@
 {
     if ([segue.identifier isEqualToString:@"showListMode"])
     {
+        clickCallphoneNumberBtnTimeMillis = 0;
         TaxiListModeViewController *taxiListModeController = [segue destinationViewController];
         taxiListModeController.taxiList = self.taxiList;
         if (isSearched)
@@ -375,7 +422,7 @@
     
     int taxiSumCount = 0;
     
-    [self.mapView removeAnnotations:self.taxiList];
+    //[self.mapView removeAnnotations:self.taxiList];
     NSMutableArray *taxiListTmp = [[NSMutableArray alloc] init];
     for (NSData *realData in dataArray)
     {
@@ -492,6 +539,8 @@
     
     if (isSearching) return;
     
+    [self.mapView removeAnnotations:self.taxiList];
+    self.taxiList = [[NSArray alloc] init];
     trySearchTaxiCount = 1;
     [SVProgressHUD showWithStatus:@"正在搜索附近出租车..."];
     isSearching = YES;
@@ -567,6 +616,7 @@
     [self InitializationMapView];
     [self InitializationCurrentPostionButton];
     
+    clickCallphoneNumberBtnTimeMillis = 0;
     NSLog(@"%@",[OperateAgreement UserPhoneNumber]);
     NSLog(@"%@",[OperateAgreement TaxiServerHost]);
 
@@ -577,12 +627,12 @@
     
     
 }
-#pragma mark UserPhoneNumber AlertView
+#pragma mark  AlertView
 
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag ==100 && buttonIndex == 0)
+    if (actionSheet.tag == 100 && buttonIndex == 0)
     {
         // ok button
         UITextField *textField = (UITextField *)[actionSheet viewWithTag:101];
@@ -601,6 +651,18 @@
             self.phoneNumberAlertView = nil;
             [self.phoneNumberAlertView show];
         }
+    }
+    
+    if (actionSheet.tag == 101 && buttonIndex == 1)
+    {
+        if (didSelectTaxiInfo != nil)
+        {
+            NSData *sendData = [OperateAgreement GetSendTransactionData:didSelectTaxiInfo.phoneNumber];
+            [self sendData:sendData];
+            [OperateAgreement SaveCallTaxiRecordWhitDriverPhoneNumber:didSelectTaxiInfo.phoneNumber
+                                                andLicenseplatenumber:didSelectTaxiInfo.licenseplatenumber];
+        }
+    
     }
     
     
@@ -626,7 +688,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     double longitude = [[ud objectForKey:LAST_UESRLOCATION_LONGITUDE] doubleValue];
     double latitude = [[ud objectForKey:LAST_UESRLOCATION_LATITUDE] doubleValue];
-    //if (longitude == 0 || latitude == 0)
+    if (longitude == 0 || latitude == 0)
     {
         
         longitude = 116.023795;
@@ -748,22 +810,11 @@
     MKAnnotationView *av = (MKAnnotationView *)[[btn superview] superview];
     TaxiInfo *taxiInfo = av.annotation;
     
-    //    NSString *info = [NSString stringWithFormat:@"您确认与车牌号为%@的司机通话吗？",taxiInfo.licenseplatenumber];
-    //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:info
-    //                              delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
-    //
-    //    //alertView.
-    //    alertView.tag = 101;
-    //    [alertView show];
     
     if (taxiInfo)
     {
         [Common makeCall:taxiInfo.phoneNumber];
-        NSData *sendData = [OperateAgreement GetSendTransactionData:taxiInfo.phoneNumber];
-        [self sendData:sendData];
-        [OperateAgreement SaveCallTaxiRecordWhitDriverPhoneNumber:taxiInfo.phoneNumber
-                                            andLicenseplatenumber:taxiInfo.licenseplatenumber];
-        
+        clickCallphoneNumberBtnTimeMillis = [[NSDate date] timeIntervalSince1970] ;
     }
 }
 
@@ -773,7 +824,7 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    return;
+    didSelectTaxiInfo = view.annotation;
 }
 
 

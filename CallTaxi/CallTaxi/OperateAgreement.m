@@ -221,6 +221,8 @@
     NSMutableData *bodyData = [[NSMutableData alloc] init];
     
     [bodyData appendData:[datestring hexToBytes]];
+    driverPhoneNumber = [driverPhoneNumber stringByPaddingTheLeftToLength:12 withString:@"0" startingAtIndex:0];
+
     [bodyData appendData:[driverPhoneNumber hexToBytes]];
     
       NSData *messageHead =[self GetMessageHeadWhitPhoneNumber:[self UserPhoneNumber] andMessageID:MESSAGE_ID_UPLoadTrade andMessageBodyLength:bodyData.length];

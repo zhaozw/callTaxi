@@ -13,6 +13,13 @@
 #import "Common.h"
 
 @interface TaxiListModeViewController ()
+{
+    double didSelectTaxiTimeMillis;
+    BOOL isCalledTaxiPhone;
+    NSString *didSelectTaxiPhoneNumber;
+    NSString *didSelectTaxilicenseplatenumber;
+
+}
 
 @property (strong,nonatomic) AsyncUdpSocket *socket;
 
@@ -135,11 +142,61 @@
 }
 
 
+#pragma mark View LifeCycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    didSelectTaxiTimeMillis = 0;
+}
 
+- (void)handleWillResignActive
+{
+    
+    double currentTimeMillis = [[NSDate date] timeIntervalSince1970]; //* 1000;
+    double dvalue = currentTimeMillis - didSelectTaxiTimeMillis;
+    NSLog(@"dvalue -------- : %f", dvalue);
+    if (dvalue > 1 && dvalue < 10)
+    {
+        isCalledTaxiPhone = YES;
+    }
+}
+
+- (void)handleDidBecomeActive
+{
+    
+    if (isCalledTaxiPhone)
+    {
+        isCalledTaxiPhone = NO;
+        NSString *info = [NSString stringWithFormat:@"是否招车成功？"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:info
+                                                           delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        
+        alertView.tag = 101;//isCalledTaxiPhoneTag;
+        [alertView show];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(handleWillResignActive)
+                                                 name: UIApplicationWillResignActiveNotification
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(handleDidBecomeActive)
+                                                 name: UIApplicationDidBecomeActiveNotification
+                                               object: nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,6 +204,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.socket = nil;
+}
+
+
+#pragma mark  AlertView
+
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (actionSheet.tag == 101 && buttonIndex == 1)
+    {
+        if (didSelectTaxiPhoneNumber.length >0 )
+        {
+            NSData *sendData = [OperateAgreement GetSendTransactionData:didSelectTaxiPhoneNumber];
+            [self sendData:sendData];
+            [OperateAgreement SaveCallTaxiRecordWhitDriverPhoneNumber:didSelectTaxiPhoneNumber
+                                                andLicenseplatenumber:didSelectTaxilicenseplatenumber];
+        }
+        
+    }
+    
+    
+}
+
 
 #pragma mark - Table view data source
 
@@ -205,7 +291,6 @@
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
     TaxiInfo *taxiInfo = [self.taxiList objectAtIndex:indexPath.row];
@@ -246,21 +331,16 @@
     
     if (taxiInfo)
     {
+        didSelectTaxiTimeMillis = [[NSDate date] timeIntervalSince1970] ;
         [Common makeCall:taxiInfo.phoneNumber];
-        NSData *sendData = [OperateAgreement GetSendTransactionData:taxiInfo.phoneNumber];
-        [self sendData:sendData];
-        [OperateAgreement SaveCallTaxiRecordWhitDriverPhoneNumber:taxiInfo.phoneNumber
-                                            andLicenseplatenumber:taxiInfo.licenseplatenumber];
+        didSelectTaxiPhoneNumber = taxiInfo.phoneNumber;
+        didSelectTaxilicenseplatenumber = taxiInfo.licenseplatenumber;
     }
 
     [self.tableView deselectRowAtIndexPath:selectedRowIndex animated:YES];
 }
 
 
-- (void)viewDidUnload
-{
-    self.socket = nil;
-    [super viewDidUnload];
-}
+
 
 @end
