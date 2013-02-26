@@ -27,34 +27,15 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *taxiServerHost = [ud objectForKey:TAXI_SERVER_HOST];
-    
-    if (self.UserPhoneNumber.length != 11)
+    if (taxiServerHost.length == 0)
     {
-        return nil;
+        taxiServerHost = [self GetTaxiServerHostWithCityName:[self ServerCityName]];
     }
     
-    if ([[self ServerCityName] isEqualToString:@"九江市"])
-    {
-        NSString *phoneNumberHead = [self.UserPhoneNumber substringToIndex:3];
-        
-        if ([phoneNumberHead isEqualToString:@"130"]||[phoneNumberHead isEqualToString:@"131"]||[phoneNumberHead isEqualToString:@"132"]||[phoneNumberHead isEqualToString:@"145"]||[phoneNumberHead isEqualToString:@"155"]||[phoneNumberHead isEqualToString:@"156"]||[phoneNumberHead isEqualToString:@"185"]||[phoneNumberHead isEqualToString:@"186"])
-        {
-            taxiServerHost = SERVER_ADDRESS_JIUJIANG_L; 
-        }
-        else
-        {
-            taxiServerHost = SERVER_ADDRESS_JIUJIANG_D;
-        }
-    }
-    else  //占时这样写。
-    {
-        return SERVER_ADDRESS_WUHAN;
-    }
-
-    
-    //NSLog(@"%@",taxiServerHost);
     return taxiServerHost;
 }
+
+
 
 + (NSString *)BusServerHost
 {
@@ -66,34 +47,57 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:phoneNumber forKey:USER_PHONENUMBER];
+    
+    //----when change ServerName  change taxiServerHost
+    NSString *taxiServerHost = [self GetTaxiServerHostWithCityName:[self ServerCityName]];
+    [self SetTaxiServerHost:taxiServerHost];
 }
 
 + (NSString *)UserPhoneNumber
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *phoneNumber = [ud valueForKey:USER_PHONENUMBER];
-//    if (phoneNumber.length == 0)
-//    {
-//      phoneNumber = @"18602789588";
-//    }
     return phoneNumber;
 }
 
 + (void)SetServerCityName:(NSString *)cityName
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setValue:cityName forKey:SERVER_CITY_NAME];
+    [ud setValue:cityName forKey:SERVER_CITY_NAME];    
+    //----when change ServerName  change taxiServerHost
+    NSString *taxiServerHost = [self GetTaxiServerHostWithCityName:cityName];
+    [self SetTaxiServerHost:taxiServerHost];
+    
 }
 
 + (NSString *)ServerCityName
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *cityName = [ud valueForKey:SERVER_CITY_NAME];
+    
+    //---占时写个默认值。
     if (cityName.length == 0)
     {
         cityName = @"九江市";
     }
     return cityName;
+}
+
+
++ (NSArray *)GetServerNameList
+{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"serverInfoList" ofType:@"plist"];
+
+    NSMutableDictionary *serverInfoDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSEnumerator * enumeratorKey = [serverInfoDic keyEnumerator];
+    
+    NSMutableArray *serverNamesArray = [[NSMutableArray alloc] init];
+    for (NSObject *object in enumeratorKey)
+    {
+        [serverNamesArray addObject:object];
+    }
+    return  serverNamesArray;
+    
 }
 
 + (void)SetReferrer:(NSString *)peopleName
@@ -230,7 +234,6 @@
     [transactionData appendData:messageHead];
     [transactionData appendData:bodyData];
     NSData *sendData = [self PackageSendData:transactionData];
-    
 
     return sendData;
 }
@@ -320,7 +323,7 @@
     ushort messageLength;
     [realData getBytes:&messageLength range:NSMakeRange(3, 2)];
     NSString *messageLengthBinaryStr = [Common ShortToBinaryString:messageLength];
-    messageLengthBinaryStr = [messageLengthBinaryStr substringFromIndex:7];
+    messageLengthBinaryStr = [messageLengthBinaryStr substringFromIndex:6];
     
     messageLength = [Common BinaryStringToInt:messageLengthBinaryStr];
     
@@ -349,8 +352,6 @@
     [nsdf2 setDateStyle:NSDateFormatterShortStyle];
     [nsdf2 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *time=[nsdf2 stringFromDate:[NSDate date]];
-    
-    
     
     fileOperate *fileoperate=[[fileOperate alloc] init];
     NSString *filePath=[fileoperate getFilePath:@"CallTaxiRecord.csv"];
@@ -394,6 +395,25 @@
 
 #pragma mark Private
 
+
++ (NSString *)GetTaxiServerHostWithCityName:(NSString *)cityname
+{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"serverInfoList" ofType:@"plist"];
+    NSMutableDictionary *serverInfoDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSDictionary *serverInfo = [serverInfoDic objectForKey:cityname];
+    NSString *taxiServerHost=@"";
+    
+    NSString *phoneNumberHead = [self.UserPhoneNumber substringToIndex:3];
+    if ([phoneNumberHead isEqualToString:@"130"]||[phoneNumberHead isEqualToString:@"131"]||[phoneNumberHead isEqualToString:@"132"]||[phoneNumberHead isEqualToString:@"145"]||[phoneNumberHead isEqualToString:@"155"]||[phoneNumberHead isEqualToString:@"156"]||[phoneNumberHead isEqualToString:@"185"]||[phoneNumberHead isEqualToString:@"186"])
+    {
+        taxiServerHost = [serverInfo objectForKey:@"Unicom"];
+    }
+    else
+    {
+        taxiServerHost = [serverInfo objectForKey:@"Telecom"];
+    }
+    return taxiServerHost;
+}
 
 //通过角度具体数值，获取8个方向之一
 + (int) GetOritationByCarTravelingAngle:(Byte)CarTravelingAngle

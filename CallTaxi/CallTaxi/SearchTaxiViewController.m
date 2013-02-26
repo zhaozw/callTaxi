@@ -173,7 +173,8 @@
 
 
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     self.socket = nil;
     [self setMapView:nil];
     [self setCurrentPostionButton:nil];
@@ -258,6 +259,7 @@
     {
         return;
     }
+    NSLog(@"sendto  %@",[OperateAgreement TaxiServerHost]);
     [self.socket sendData:data toHost:[OperateAgreement TaxiServerHost] port:UDP_TAXI_SERVER_PORT  withTimeout:1 tag:0];
     
 }
@@ -268,6 +270,10 @@
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
+    [SGInfoAlert showInfo:info
+                  bgColor:[[UIColor darkGrayColor] CGColor]
+                   inView:self.view
+                 vertical:0.7];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     
@@ -470,8 +476,6 @@
             double userLatitude = self.mapView.userLocation.coordinate.latitude;
             double userLongitude = self.mapView.userLocation.coordinate.longitude;
             
-            NSLog(@"%f,%f",self.mapView.userLocation.coordinate.latitude,self.mapView.userLocation.coordinate.longitude);
-            NSLog(@"%f,%f",self.mapView.userLocation.location.verticalAccuracy,self.mapView.userLocation.location.horizontalAccuracy);
 
             if (userLongitude == 0 || userLatitude == 0
                 || self.mapView.userLocation.location.verticalAccuracy > 300
@@ -545,12 +549,12 @@
 {
     
     if (isSearching) return;
-    
+    isSearching = YES;
+
     [self.mapView removeAnnotations:self.taxiList];
     self.taxiList = [[NSArray alloc] init];
     trySearchTaxiCount = 1;
     [SVProgressHUD showWithStatus:@"正在搜索附近出租车..."];
-    isSearching = YES;
     
     //定时器
     NSTimer *showTimer = [NSTimer scheduledTimerWithTimeInterval:3

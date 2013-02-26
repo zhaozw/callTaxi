@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>武汉市</key>
+	<dict>
+		<key>Telecom</key>
+		<string>wh.cityofcar.com</string>
+		<key>Unicom</key>
+		<string>wh.cityofcar.com</string>
+		<key>LatOffset</key>
+		<real>0</real>
+		<key>LngOffset</key>
+		<real>0</real>
+	</dict>
+	<key>九江市</key>
+	<dict>
+		<key>Telecom</key>
+		<string>gqcd.cityofcar.com</string>
+		<key>Unicom</key>
+		<string>gqcl.cityofcar.com</string>
+		<key>LatOffset</key>
+		<integer>0</integer>
+		<key>LngOffset</key>
+		<integer>0</integer>
+	</dict>
+</dict>
+</plist>

@@ -31,7 +31,6 @@
 		E50FA98616D75118005FE832 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = E50FA97D16D75118005FE832 /* 8.png */; };
 		E50FA98716D75118005FE832 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = E50FA97E16D75118005FE832 /* 9.png */; };
 		E50FA98916D75626005FE832 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50FA98816D75626005FE832 /* AudioToolbox.framework */; };
-		E50FA98D16D763BB005FE832 /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = E50FA98C16D763BB005FE832 /* glass.wav */; };
 		E50FA98F16D7666B005FE832 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50FA98E16D7666B005FE832 /* AVFoundation.framework */; };
 		E50FA99316D78006005FE832 /* on.m4r in Resources */ = {isa = PBXBuildFile; fileRef = E50FA99216D78006005FE832 /* on.m4r */; };
 		E517853F16D240B00017ECA2 /* TaxiInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E517853E16D240B00017ECA2 /* TaxiInfo.m */; };
@@ -91,6 +90,7 @@
 		E567EBF516C110E900D2F0F2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E567EBF316C110E900D2F0F2 /* MainStoryboard.storyboard */; };
 		E567EC0016C125CA00D2F0F2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E567EBFE16C125A900D2F0F2 /* MapKit.framework */; };
 		E567EC0316C1271A00D2F0F2 /* SearchTaxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E567EC0216C1271A00D2F0F2 /* SearchTaxiViewController.m */; };
+		E57A611916DB92B300B3129C /* serverInfoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E57A611816DB92B300B3129C /* serverInfoList.plist */; };
 		E59EC31716C8E74A007B9272 /* OperateAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = E59EC31616C8E74A007B9272 /* OperateAgreement.m */; };
 		E59EC31B16C8ED11007B9272 /* NSString+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = E59EC31A16C8ED11007B9272 /* NSString+Help.m */; };
 		E5A1055E16D0AD7000ABC91F /* transport.png in Resources */ = {isa = PBXBuildFile; fileRef = E5A1055C16D0AD7000ABC91F /* transport.png */; };
@@ -128,7 +128,6 @@
 		E50FA97D16D75118005FE832 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		E50FA97E16D75118005FE832 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		E50FA98816D75626005FE832 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		E50FA98C16D763BB005FE832 /* glass.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glass.wav; sourceTree = "<group>"; };
 		E50FA98E16D7666B005FE832 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E50FA99216D78006005FE832 /* on.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = on.m4r; sourceTree = "<group>"; };
 		E517853D16D240B00017ECA2 /* TaxiInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiInfo.h; sourceTree = "<group>"; };
@@ -210,6 +209,7 @@
 		E567EBFE16C125A900D2F0F2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E567EC0116C1271A00D2F0F2 /* SearchTaxiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTaxiViewController.h; sourceTree = "<group>"; };
 		E567EC0216C1271A00D2F0F2 /* SearchTaxiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTaxiViewController.m; sourceTree = "<group>"; };
+		E57A611816DB92B300B3129C /* serverInfoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = serverInfoList.plist; sourceTree = "<group>"; };
 		E59EC31516C8E74A007B9272 /* OperateAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperateAgreement.h; sourceTree = "<group>"; };
 		E59EC31616C8E74A007B9272 /* OperateAgreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperateAgreement.m; sourceTree = "<group>"; };
 		E59EC31916C8ED11007B9272 /* NSString+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Help.h"; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 		E5085C7116D37A8D009FDB47 /* TaxiImage */ = {
 			isa = PBXGroup;
 			children = (
+				E506DEF916D45EEF0019E32A /* Call.png */,
 				E5085C7616D37D00009FDB47 /* 014.png */,
 				E5085C7816D38592009FDB47 /* 024.png */,
 				E5085C7916D38592009FDB47 /* 034.png */,
@@ -294,6 +295,8 @@
 		E51D93BC16D5E78D002986B4 /* BusImage */ = {
 			isa = PBXGroup;
 			children = (
+				E51D93BF16D5EC58002986B4 /* station.png */,
+				E51D93C016D5EC58002986B4 /* station@2x.png */,
 				E50FA97616D75118005FE832 /* 1.png */,
 				E50FA97716D75118005FE832 /* 2.png */,
 				E50FA97816D75118005FE832 /* 3.png */,
@@ -366,7 +369,7 @@
 			name = SVProgressHUD;
 			sourceTree = "<group>";
 		};
-		E529293E16DB4F1B00F2D984 /* tabImage */ = {
+		E529293E16DB4F1B00F2D984 /* TabImage */ = {
 			isa = PBXGroup;
 			children = (
 				E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */,
@@ -378,7 +381,7 @@
 				E529293616DB4EA200F2D984 /* setting.png */,
 				E529293716DB4EA200F2D984 /* taxi.png */,
 			);
-			name = tabImage;
+			name = TabImage;
 			sourceTree = "<group>";
 		};
 		E53ADEAE16C7716200CE8596 /* MacAddressMd5Value */ = {
@@ -500,29 +503,34 @@
 		E567EBE216C110E900D2F0F2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E529293E16DB4F1B00F2D984 /* tabImage */,
-				E50FA99216D78006005FE832 /* on.m4r */,
-				E50FA98C16D763BB005FE832 /* glass.wav */,
+				E57A611A16DB957E00B3129C /* App Image */,
+				E529293E16DB4F1B00F2D984 /* TabImage */,
 				E562168416C3A7D600950791 /* PostionButtonImage */,
 				E5085C7116D37A8D009FDB47 /* TaxiImage */,
 				E51D93BC16D5E78D002986B4 /* BusImage */,
 				E51D93D416D60A79002986B4 /* BusLineGpsInfo */,
-				E51D93BF16D5EC58002986B4 /* station.png */,
-				E51D93C016D5EC58002986B4 /* station@2x.png */,
-				E51D93B016D5D21C002986B4 /* IPhoneAPP.png */,
-				E51D93B116D5D21C002986B4 /* IPhoneAPP57.png */,
-				E506DEF916D45EEF0019E32A /* Call.png */,
-				E5A1056A16D0C62B00ABC91F /* Default-568h@2x.png */,
-				E5A1056B16D0C62B00ABC91F /* Default.png */,
-				E5A1056C16D0C62B00ABC91F /* Default@2x.png */,
 				E567EBEA16C110E900D2F0F2 /* AppDelegate.h */,
 				E567EBEB16C110E900D2F0F2 /* AppDelegate.m */,
+				E50FA99216D78006005FE832 /* on.m4r */,
 				E567EBE316C110E900D2F0F2 /* CallTaxi-Info.plist */,
 				E567EBE416C110E900D2F0F2 /* InfoPlist.strings */,
 				E567EBE716C110E900D2F0F2 /* main.m */,
 				E567EBE916C110E900D2F0F2 /* CallTaxi-Prefix.pch */,
+				E57A611816DB92B300B3129C /* serverInfoList.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E57A611A16DB957E00B3129C /* App Image */ = {
+			isa = PBXGroup;
+			children = (
+				E51D93B016D5D21C002986B4 /* IPhoneAPP.png */,
+				E51D93B116D5D21C002986B4 /* IPhoneAPP57.png */,
+				E5A1056A16D0C62B00ABC91F /* Default-568h@2x.png */,
+				E5A1056B16D0C62B00ABC91F /* Default.png */,
+				E5A1056C16D0C62B00ABC91F /* Default@2x.png */,
+			);
+			name = "App Image";
 			sourceTree = "<group>";
 		};
 		E59EC31816C8ECC6007B9272 /* NSStringHelp */ = {
@@ -630,7 +638,6 @@
 				E50FA98516D75118005FE832 /* 7.png in Resources */,
 				E50FA98616D75118005FE832 /* 8.png in Resources */,
 				E50FA98716D75118005FE832 /* 9.png in Resources */,
-				E50FA98D16D763BB005FE832 /* glass.wav in Resources */,
 				E50FA99316D78006005FE832 /* on.m4r in Resources */,
 				E52302DA16D8DB32003A89B3 /* SVWebViewController.bundle in Resources */,
 				E529293816DB4EA200F2D984 /* bus.png in Resources */,
@@ -641,6 +648,7 @@
 				E529294216DB4F4D00F2D984 /* callTaxiRecord@2x.png in Resources */,
 				E529294316DB4F4D00F2D984 /* setting@2x.png in Resources */,
 				E529294416DB4F4D00F2D984 /* taxi@2x.png in Resources */,
+				E57A611916DB92B300B3129C /* serverInfoList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

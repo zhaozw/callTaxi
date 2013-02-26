@@ -43,9 +43,6 @@
 #define LAST_UESRLOCATION_LATITUDE       @"last_userlocation_latitude"
 #define LAST_UESRLOCATION_LONGITUDE      @"last_userlocation_longitude"
 
-#define SERVER_ADDRESS_JIUJIANG_D        @"gqcd.cityofcar.com"
-#define SERVER_ADDRESS_JIUJIANG_L        @"gqcl.cityofcar.com"
-#define SERVER_ADDRESS_WUHAN             @"wh.cityofcar.com"
 
 
 #define COMPANY_WEBSITE                  @"http://www.cityofcar.com"
@@ -87,6 +84,8 @@
 + (void)SetServerCityName:(NSString *)cityName ;
 
 + (NSString *)ServerCityName;
+
++ (NSArray *)GetServerNameList;
 
 + (void)SetReferrer:(NSString *)peopleName ;
 

@@ -73,6 +73,7 @@
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
+    
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     

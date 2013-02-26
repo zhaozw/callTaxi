@@ -78,7 +78,7 @@
 {
     if (_pickerData == nil)
     {
-        _pickerData = [[NSArray alloc]initWithObjects:@"九江市",@"武汉市", nil];
+        _pickerData = [OperateAgreement GetServerNameList];
     }
     return _pickerData;
 }
@@ -220,7 +220,7 @@ const int referrerAlertViewTextFieldTag =103;
             [self.serverCitySelectActionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
             [self.serverCitySelectActionSheet setBounds:CGRectMake(0, 0, 320, 485)];
             UIPickerView *pickerView = (UIPickerView *)[self.serverCitySelectActionSheet viewWithTag:100];
-            int value = [self.pickerData indexOfObject: [OperateAgreement ServerCityName]];        //someString 是我想让uipicerview自动选中的值
+            int value = [self.pickerData indexOfObject: [OperateAgreement ServerCityName]];
             [pickerView selectRow:value inComponent:0 animated:NO];
         }
 
@@ -307,7 +307,7 @@ const int referrerAlertViewTextFieldTag =103;
         UITextField *textField = (UITextField *)[actionSheet viewWithTag:referrerAlertViewTextFieldTag];
         NSString *peopleName = textField.text;
     
-        if (![peopleName isEqualToString:[OperateAgreement Referrer]])
+        if (![peopleName isEqualToString:[OperateAgreement Referrer]] && peopleName.length > 0)
         {
             [OperateAgreement SetReferrer:peopleName];
             [self.tableView reloadData];
@@ -412,6 +412,10 @@ const int referrerAlertViewTextFieldTag =103;
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
+    [SGInfoAlert showInfo:info
+                  bgColor:[[UIColor darkGrayColor] CGColor]
+                   inView:self.view
+                 vertical:0.7];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     
