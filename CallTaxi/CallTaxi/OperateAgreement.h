@@ -51,13 +51,19 @@
 #define MESSAGE_HEAD_LENGTH           19      //Message Head Length(+First and Last identification+Check bit)  
 #define MESSAGE_BODY_START_INDEX      17
 
+
 @interface OperateAgreement : NSObject
+
 
 + (BOOL)JudgeisCompleteData:(NSData *)data;
 
 + (NSString *)GetMessageIdInMessageHead:(NSData *)realData;
 
 + (ushort)GetMessageLengthInMessageHead:(NSData *)realData;
+
++ (ushort)GetPackageCountInMessageHead:(NSData *)realData;
+
++ (ushort)GetPackageIndexInMessageHead:(NSData *)realData;
 
 + (NSData *)GetLoginData;
 
@@ -112,6 +118,8 @@
 + (void)SaveCallTaxiRecordWhitDriverPhoneNumber:(NSString *)phoneNumber andLicenseplatenumber:(NSString *)licenseplatenumber;
 
 + (NSArray *)getCallTaxiRecord;
+
+
 
 
 @end

@@ -330,6 +330,27 @@
     return messageLength;
 }
 
++ (ushort)GetPackageCountInMessageHead:(NSData *)realData
+{
+    ushort packageCount;
+    NSData *packageCountData = [realData subdataWithRange:NSMakeRange(13, 2)];
+    
+    packageCountData = [Common reversedData:packageCountData];
+    [packageCountData getBytes:&packageCount range:NSMakeRange(0, 2)];
+
+    return packageCount;
+}
+
++ (ushort)GetPackageIndexInMessageHead:(NSData *)realData
+{
+    ushort packageindex;
+    NSData *packageindexData = [realData subdataWithRange:NSMakeRange(15, 2)];
+    
+    packageindexData = [Common reversedData:packageindexData];
+    [packageindexData getBytes:&packageindex range:NSMakeRange(0, 2)];
+    
+    return packageindex;
+}
 
 + (UIImage *)GetTaxiImageWithAngle:(short)angle andTaxiState:(Byte)state
 {

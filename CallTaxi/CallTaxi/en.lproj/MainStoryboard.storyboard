@@ -22,7 +22,7 @@
                     <navigationItem key="navigationItem" title="查出租车" id="OjR-LQ-Nrt">
                         <barButtonItem key="leftBarButtonItem" title="搜车" id="1SY-wT-4oK">
                             <connections>
-                                <action selector="searchTaxi:" destination="69u-8b-6HB" id="jcw-HQ-eQy"/>
+                                <action selector="searchTaxiClick:" destination="69u-8b-6HB" id="rUk-Cm-QsN"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="列表模式" id="d8Q-hq-ZZj">
@@ -520,6 +520,7 @@
         <class className="SearchBusViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchBusViewController.h"/>
             <relationships>
+                <relationship kind="action" name="showBusStationName:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
             </relationships>
         </class>
@@ -535,7 +536,6 @@
         <class className="SettingViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingViewController.h"/>
             <relationships>
-                <relationship kind="action" name="RangeSliderValueChange:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="rangeLable" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rangeSlider" candidateClass="UISlider"/>
             </relationships>

@@ -29,6 +29,7 @@
     BOOL getCurrentPostioning;
     BOOL isLogining;
     BOOL isSearching;
+    BOOL isStartReceTaxiInfo;
     BOOL isSearched;
     BOOL isGetUserLocation;
     BOOL isCalledTaxiPhone;
@@ -43,6 +44,7 @@
 @property (strong,nonatomic) UIAlertView *phoneNumberAlertView;
 @property (strong,nonatomic) NSArray *taxiList;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic,strong) CLLocationManager *locationManager;
 
 
 
@@ -58,12 +60,25 @@
 @synthesize phoneNumberAlertView = _phoneNumberAlertView;
 @synthesize taxiList = _taxiList;
 @synthesize audioPlayer = _audioPlayer;
+@synthesize locationManager = _locationManager;
 
 #pragma mark - property
 
 
 //const int phoneNumberAlertViewTag = 100;
 //const int isCalledTaxiPhoneTag = 101;
+
+- (CLLocationManager *)locationManager
+{
+    if (_locationManager == nil)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.distanceFilter = 1000;
+    }
+    return _locationManager;
+}
 
 - (AsyncUdpSocket *)socket
 {
@@ -117,7 +132,7 @@
     
     [self InitializationConfig];
     isGetUserLocation = NO;
-
+    
     //定时器
     NSTimer *showTimer = [NSTimer scheduledTimerWithTimeInterval:3
                                                           target:self
@@ -130,6 +145,8 @@
     if ([CLLocationManager locationServicesEnabled])
     {
         [self.spinner startAnimating];
+        [self.locationManager startUpdatingLocation];
+        
         getCurrentPostioning = YES;
     }
     else
@@ -145,7 +162,7 @@
 
 - (void)handleWillResignActive
 {
-
+    
     double currentTimeMillis = [[NSDate date] timeIntervalSince1970]; //* 1000;
     double dvalue = currentTimeMillis - clickCallphoneNumberBtnTimeMillis;
     NSLog(@"dvalue --111111--- : %f", dvalue);
@@ -158,13 +175,13 @@
 
 - (void)handleDidBecomeActive
 {
-
+    
     if (isCalledTaxiPhone)
     {
         isCalledTaxiPhone = NO;
-         NSString *info = [NSString stringWithFormat:@"是否招车成功？"];
-         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:info
-                                   delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        NSString *info = [NSString stringWithFormat:@"是否招车成功？"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:info
+                                                           delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
         
         alertView.tag = 101;//isCalledTaxiPhoneTag;
         [alertView show];
@@ -244,17 +261,17 @@
 
 - (void)sendData:(NSData * )data
 {
-    if (![Common isExistenceNetwork])
-    {
-        [SGInfoAlert showInfo: @"系统未检测到网络连接,请开启WiFi或GPRS"
-                      bgColor:[[UIColor blackColor] CGColor]
-                       inView:self.view vertical:0.6];
-        
-        //--------stop SearchTaxi timer
-        trySearchTaxiCount = 100;
-        [SVProgressHUD dismiss];
-        return;
-    }
+    //    if (![Common isExistenceNetwork])
+    //    {
+    //        [SGInfoAlert showInfo: @"系统未检测到网络连接,请开启WiFi或GPRS"
+    //                      bgColor:[[UIColor blackColor] CGColor]
+    //                       inView:self.view vertical:0.6];
+    //
+    //        //--------stop SearchTaxi timer
+    //        trySearchTaxiCount = 100;
+    //        [SVProgressHUD dismiss];
+    //        return;
+    //    }
     if ([OperateAgreement UserPhoneNumber].length == 0)
     {
         return;
@@ -267,13 +284,15 @@
 //UDP接收消息
 - (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port
 {
+    
+    
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
-    [SGInfoAlert showInfo:info
-                  bgColor:[[UIColor darkGrayColor] CGColor]
-                   inView:self.view
-                 vertical:0.7];
+    //    [SGInfoAlert showInfo:info
+    //                  bgColor:[[UIColor darkGrayColor] CGColor]
+    //                   inView:self.view
+    //                 vertical:0.7];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     
@@ -423,13 +442,11 @@
 {
     [SVProgressHUD dismiss];
     isSearched = YES;
-    if (isSearching == NO) return;
-    isSearching = NO;
+    isStartReceTaxiInfo = YES;
+    if (isSearching == NO)
+        return;
     
-    int taxiSumCount = 0;
-    
-    //[self.mapView removeAnnotations:self.taxiList];
-    NSMutableArray *taxiListTmp = [[NSMutableArray alloc] init];
+    NSMutableArray *taxiListTmp = [[NSMutableArray alloc] initWithArray:self.taxiList];
     for (NSData *realData in dataArray)
     {
         NSUInteger len = [realData length];
@@ -439,7 +456,6 @@
         
         NSData *taxiCountData = [Common reversedData:[realData subdataWithRange:NSMakeRange(MESSAGE_BODY_START_INDEX, 2)]];
         ushort taxiCount =  *(const UInt16 *)[taxiCountData bytes];
-        taxiSumCount += taxiCount;
         
         for (int i = 0; i < taxiCount; i++)
         {
@@ -467,7 +483,7 @@
             taxiInfo.taxiType = [[NSString alloc] initWithData:[realData subdataWithRange:NSMakeRange(taxiInfoStartIndex + 29, 12)] encoding:enc];
             
             taxiInfo.star = realDataByteArray[taxiInfoStartIndex + 41];
-                        
+            
             taxiInfo.angle = *(const UInt16 *)[[realData subdataWithRange:NSMakeRange(taxiInfoStartIndex + 42, 2)] bytes];
             
             taxiInfo.speed = realDataByteArray[taxiInfoStartIndex + 44];
@@ -476,7 +492,7 @@
             double userLatitude = self.mapView.userLocation.coordinate.latitude;
             double userLongitude = self.mapView.userLocation.coordinate.longitude;
             
-
+            
             if (userLongitude == 0 || userLatitude == 0
                 || self.mapView.userLocation.location.verticalAccuracy > 300
                 || self.mapView.userLocation.location.horizontalAccuracy > 300
@@ -495,25 +511,35 @@
             [taxiListTmp addObject:taxiInfo];
             
         }
+        self.taxiList = taxiListTmp;
+        
+        
+        [self.mapView addAnnotations:self.taxiList];
+        
+        ushort packageIndex =[OperateAgreement GetPackageIndexInMessageHead:realData];
+        ushort packageCount =[OperateAgreement GetPackageCountInMessageHead:realData];
+        
+        NSLog(@"%d",packageIndex);
+        NSLog(@"%d",packageCount);
+        if (packageIndex == packageCount )
+        {
+            
+            isSearching = NO;
+            
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distanceFromUser" ascending:YES];
+            NSArray *sortDescriptors = [NSArray arrayWithObject: sortDescriptor];
+            [taxiListTmp sortUsingDescriptors:sortDescriptors];
+            [self showTaxionMapView:taxiListTmp Count:5];
+            NSString *info = [[NSString alloc] initWithFormat:@"搜索到%d辆出租车！(范围:%d公里)",self.taxiList.count,[OperateAgreement Range]];
+            
+            [SGInfoAlert showInfo:info bgColor:[[UIColor darkGrayColor] CGColor]
+                           inView:self.view vertical:0.7];
+        }
         
     }
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distanceFromUser" ascending:YES];
-    
-    NSArray *sortDescriptors = [NSArray arrayWithObject: sortDescriptor];
-    [taxiListTmp sortUsingDescriptors:sortDescriptors];
-    
-    self.taxiList = taxiListTmp;
     
     
-    [self.mapView addAnnotations:self.taxiList];
-    [self showTaxionMapView:taxiListTmp Count:5];
-    
-    //self.mapView se
-    
-    NSString *info = [[NSString alloc] initWithFormat:@"搜索到%d辆出租车！(范围:%d公里)",taxiSumCount,[OperateAgreement Range]];
-    [SGInfoAlert showInfo:info bgColor:[[UIColor darkGrayColor] CGColor]
-                   inView:self.view vertical:0.7];
 }
 
 
@@ -533,7 +559,7 @@
         MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
         zoomRect = MKMapRectUnion(zoomRect, pointRect);
     }
- 
+    
     [self.mapView setVisibleMapRect:zoomRect animated:YES];
     
     
@@ -545,47 +571,31 @@
 #pragma mark - SearchTaxi
 
 
-- (IBAction)searchTaxi:(id)sender
+
+- (IBAction)searchTaxiClick:(id)sender
 {
-    
+    [self searchTaxi];
+}
+
+
+- (void)searchTaxi
+{
     if (isSearching) return;
     isSearching = YES;
-
+    isStartReceTaxiInfo = NO;
     [self.mapView removeAnnotations:self.taxiList];
-    self.taxiList = [[NSArray alloc] init];
+    self.taxiList = nil;
     trySearchTaxiCount = 1;
     [SVProgressHUD showWithStatus:@"正在搜索附近出租车..."];
     
     //定时器
-    NSTimer *showTimer = [NSTimer scheduledTimerWithTimeInterval:3
-                                                          target:self
-                                                        selector:@selector(searchTaxiThread:)
-                                                        userInfo:nil
-                                                         repeats:YES];
-    [showTimer fire];
-    
-    
-    
-    //    dispatch_queue_t downloadQueue=dispatch_queue_create("flickr downloader", NULL);
-    //
-    //    dispatch_async(downloadQueue, ^{
-    //        dispatch_async(dispatch_get_main_queue(), ^{
-    //
-    //
-    //       });
-    //
-    //    });
-    
-    //    NSString *aString = @"1234abcd";
-    //
-    //    NSData *aData = [aString dataUsingEncoding: NSUTF8StringEncoding];
-    
-    //    dispatch_queue_t downloadQueue=dispatch_queue_create("flickrphoto downloader", NULL);
-    //    dispatch_async(downloadQueue, ^{
-    //
-    //    });
+    NSTimer *searchTaxiTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                                target:self
+                                                              selector:@selector(searchTaxiThread:)
+                                                              userInfo:nil
+                                                               repeats:YES];
+    [searchTaxiTimer fire];
 }
-
 
 - (void)searchTaxiThread:(NSTimer *)theTimer
 {
@@ -593,7 +603,7 @@
     {
         if (isSearching)
         {
-            [SVProgressHUD dismissWithError:@"搜车请求超时..." afterDelay:2];
+            [SVProgressHUD dismissWithError:@"搜车请求超时..." afterDelay:3];
         }
         isSearching = NO;
         
@@ -601,12 +611,13 @@
         return;
     }
     
-    if (isSearching)
+    if (isSearching && isStartReceTaxiInfo == NO)
     {
         //--------------------------Login
         [self sendData:[OperateAgreement GetSearchTaxiDataWithLatitude:self.mapView.centerCoordinate.latitude
                                                           andLongitude:self.mapView.centerCoordinate.longitude
                                                                  range:[OperateAgreement Range]]];
+        sleep(1);
     }
     else
     {
@@ -630,7 +641,7 @@
     clickCallphoneNumberBtnTimeMillis = 0;
     NSLog(@"%@",[OperateAgreement UserPhoneNumber]);
     NSLog(@"%@",[OperateAgreement TaxiServerHost]);
-
+    
     if ([OperateAgreement UserPhoneNumber].length == 0)
     {
         [self.phoneNumberAlertView show];
@@ -673,7 +684,7 @@
             [OperateAgreement SaveCallTaxiRecordWhitDriverPhoneNumber:didSelectTaxiInfo.phoneNumber
                                                 andLicenseplatenumber:didSelectTaxiInfo.licenseplatenumber];
         }
-    
+        
     }
     
     
@@ -747,7 +758,7 @@
     {
         return;
     }
- 
+    
     
     if (![CLLocationManager locationServicesEnabled])
     {
@@ -781,6 +792,37 @@
         [self.currentPostionButton setImage:[Common currentPostionBtnImgLocationGrey] forState:UIControlStateNormal];
     }
     
+}
+
+#pragma mark - CLLocationManagerDelegate Methods
+
+BOOL isTestCity = NO;
+
+//获取位置信息
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (placemarks.count > 0)
+         {
+             CLPlacemark * localCity = [placemarks objectAtIndex:0];
+             NSLog(@"%@",localCity.administrativeArea);
+             BOOL found = NO;
+             NSArray *arrayOfStrings = [[NSArray alloc] initWithObjects:@"Anhui",@"安徽",@"Gansu",@"甘肃",
+                                        @"Chongqing",@"重庆", @"Sichuan",@"四川",nil];
+             for (NSString *s in arrayOfStrings)
+             {
+                 if ([localCity.administrativeArea rangeOfString:s].location != NSNotFound) {
+                     found = YES;
+                     break;
+                 }
+             }
+             isTestCity = found;
+         }
+     }];
+    
+    [self.locationManager stopUpdatingLocation];
 }
 
 #pragma mark - MKMapView Delegate
@@ -926,7 +968,7 @@ static SystemSoundID soundIDTest = 0;
                                  sizeof (sessionCategory),                                   // 3
                                  &sessionCategory                                            // 4
                                  );
-        AudioServicesCreateSystemSoundID( (__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundIDTest );        
+        AudioServicesCreateSystemSoundID( (__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundIDTest );
     }
     
 }
@@ -939,11 +981,17 @@ static SystemSoundID soundIDTest = 0;
 
 - (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    if (motion == UIEventSubtypeMotionShake) {
-        //        NSLog(@"Shake..........");
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        [self PlayShakeMusic];
-        [self searchTaxi:nil];
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        if (!isSearching)
+        {
+            NSLog(@"Shake..........");
+            
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            [self PlayShakeMusic];
+            [self searchTaxi];
+            
+        }
         
     }
 }
@@ -963,7 +1011,7 @@ static SystemSoundID soundIDTest = 0;
     if ([player isEqual:self.audioPlayer]){
         self.audioPlayer = nil;
     }
-
+    
 }
 
 //播放摇一摇的声音
@@ -974,7 +1022,7 @@ static SystemSoundID soundIDTest = 0;
     NSString *soundPath=[[NSBundle mainBundle] pathForResource:@"on" ofType:@"m4r"];
     NSURL *soundUrl=[[NSURL alloc] initFileURLWithPath:soundPath];
     self.audioPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
-
+    
     //self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData error:&error];
     if (self.audioPlayer != nil)
     {

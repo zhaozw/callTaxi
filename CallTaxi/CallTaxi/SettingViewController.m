@@ -197,6 +197,22 @@ const int referrerAlertViewTextFieldTag =103;
                 peopleName = @"空";
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",peopleName];
         }
+        if (indexPath.row == 2)
+        {
+            extern BOOL isTestCity;
+            if (isTestCity)
+            {
+                cell.textLabel.text = @"南京联卓信息科技有限公司";
+            }
+
+        }
+        if (indexPath.row == 4)
+        {
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"程序版本号：%@",version];
+        }
+   
 
     }
 }
@@ -255,9 +271,14 @@ const int referrerAlertViewTextFieldTag =103;
         }
         if (indexPath.row == 2)
         {
-            NSURL *URL = [NSURL URLWithString:COMPANY_WEBSITE];
-            SVWebViewController *webViewController = [[SVWebViewController alloc] initWithURL:URL];
-            [self.navigationController pushViewController:webViewController animated:YES];
+            extern BOOL isTestCity;
+            if (!isTestCity)
+            {
+                NSURL *URL = [NSURL URLWithString:COMPANY_WEBSITE];
+                SVWebViewController *webViewController = [[SVWebViewController alloc] initWithURL:URL];
+                [self.navigationController pushViewController:webViewController animated:YES];
+            }
+
         }
         if (indexPath.row == 3)
         {
@@ -412,10 +433,10 @@ const int referrerAlertViewTextFieldTag =103;
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
-    [SGInfoAlert showInfo:info
-                  bgColor:[[UIColor darkGrayColor] CGColor]
-                   inView:self.view
-                 vertical:0.7];
+//    [SGInfoAlert showInfo:info
+//                  bgColor:[[UIColor darkGrayColor] CGColor]
+//                   inView:self.view
+//                 vertical:0.7];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     

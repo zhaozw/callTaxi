@@ -162,10 +162,10 @@
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
-    [SGInfoAlert showInfo:info
-                  bgColor:[[UIColor darkGrayColor] CGColor]
-                   inView:self.view
-                 vertical:0.7];
+//    [SGInfoAlert showInfo:info
+//                  bgColor:[[UIColor darkGrayColor] CGColor]
+//                   inView:self.view
+//                 vertical:0.7];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     
