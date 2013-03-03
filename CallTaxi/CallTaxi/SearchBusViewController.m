@@ -96,10 +96,10 @@
 
 - (void)handleDidBecomeActive
 {
-//    if (_searchBusTimer == nil)
-//    {
-//        [self.searchBusTimer fire];
-//    }
+    if (_searchBusTimer == nil)
+    {
+        [self.searchBusTimer fire];
+    }
 }
 
 

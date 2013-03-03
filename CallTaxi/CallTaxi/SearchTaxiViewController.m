@@ -45,6 +45,7 @@
 @property (strong,nonatomic) NSArray *taxiList;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic,strong) CLLocationManager *locationManager;
+@property (nonatomic,strong) NSTimer *searchTaxiTimer;
 
 
 
@@ -61,12 +62,26 @@
 @synthesize taxiList = _taxiList;
 @synthesize audioPlayer = _audioPlayer;
 @synthesize locationManager = _locationManager;
+@synthesize searchTaxiTimer = _searchTaxiTimer;
 
 #pragma mark - property
 
 
 //const int phoneNumberAlertViewTag = 100;
 //const int isCalledTaxiPhoneTag = 101;
+
+- (NSTimer *)searchTaxiTimer
+{
+    if (_searchTaxiTimer == nil)
+    {
+        _searchTaxiTimer =[NSTimer scheduledTimerWithTimeInterval:5
+                                                           target:self
+                                                         selector:@selector(searchTaxiThread:)
+                                                         userInfo:nil
+                                                          repeats:YES];
+    }
+    return _searchTaxiTimer;
+}
 
 - (CLLocationManager *)locationManager
 {
@@ -438,6 +453,7 @@
     }
 }
 
+short receTaxiInfoCurrentPacIndex = -1;
 - (void)searchTaxiMeaageHandling:(NSArray *)dataArray
 {
     [SVProgressHUD dismiss];
@@ -453,6 +469,16 @@
         Byte *realDataByteArray = (Byte*)malloc(len);
         memcpy(realDataByteArray, [realData bytes], len);
         
+        
+        
+        ushort packageIndex =[OperateAgreement GetPackageIndexInMessageHead:realData];
+        ushort packageCount =[OperateAgreement GetPackageCountInMessageHead:realData];
+        
+        if (receTaxiInfoCurrentPacIndex >= packageIndex)
+            return;
+        receTaxiInfoCurrentPacIndex = packageIndex;
+        NSLog(@"%d",packageIndex);
+        NSLog(@"%d",packageCount);
         
         NSData *taxiCountData = [Common reversedData:[realData subdataWithRange:NSMakeRange(MESSAGE_BODY_START_INDEX, 2)]];
         ushort taxiCount =  *(const UInt16 *)[taxiCountData bytes];
@@ -516,16 +542,14 @@
         
         [self.mapView addAnnotations:self.taxiList];
         
-        ushort packageIndex =[OperateAgreement GetPackageIndexInMessageHead:realData];
-        ushort packageCount =[OperateAgreement GetPackageCountInMessageHead:realData];
         
-        NSLog(@"%d",packageIndex);
-        NSLog(@"%d",packageCount);
         if (packageIndex == packageCount )
         {
             
             isSearching = NO;
             
+            [self.searchTaxiTimer invalidate];
+            self.searchTaxiTimer = nil;
             NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distanceFromUser" ascending:YES];
             NSArray *sortDescriptors = [NSArray arrayWithObject: sortDescriptor];
             [taxiListTmp sortUsingDescriptors:sortDescriptors];
@@ -580,50 +604,53 @@
 
 - (void)searchTaxi
 {
-    if (isSearching) return;
+    if (isSearching)
+    {
+        [SGInfoAlert showInfo:@"请稍后在搜索。。。。" bgColor:[[UIColor darkGrayColor] CGColor]
+                       inView:self.view vertical:0.6];
+        return;
+    }
     isSearching = YES;
     isStartReceTaxiInfo = NO;
+    trySearchTaxiCount = 1;
+    receTaxiInfoCurrentPacIndex = -1;
+    
+    
     [self.mapView removeAnnotations:self.taxiList];
     self.taxiList = nil;
-    trySearchTaxiCount = 1;
-    [SVProgressHUD showWithStatus:@"正在搜索附近出租车..."];
     
-    //定时器
-    NSTimer *searchTaxiTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                                target:self
-                                                              selector:@selector(searchTaxiThread:)
-                                                              userInfo:nil
-                                                               repeats:YES];
-    [searchTaxiTimer fire];
+    [SVProgressHUD showWithStatus:@"正在搜索附近出租车..."];
+    self.searchTaxiTimer = nil;
+    [self.searchTaxiTimer fire];
 }
 
 - (void)searchTaxiThread:(NSTimer *)theTimer
 {
-    if (trySearchTaxiCount > 3)
+    if (trySearchTaxiCount > 2)
     {
         if (isSearching)
         {
             [SVProgressHUD dismissWithError:@"搜车请求超时..." afterDelay:3];
         }
         isSearching = NO;
-        
-        [theTimer invalidate];
-        return;
     }
     
-    if (isSearching && isStartReceTaxiInfo == NO)
+    if (isSearching)
     {
-        //--------------------------Login
-        [self sendData:[OperateAgreement GetSearchTaxiDataWithLatitude:self.mapView.centerCoordinate.latitude
-                                                          andLongitude:self.mapView.centerCoordinate.longitude
-                                                                 range:[OperateAgreement Range]]];
-        sleep(1);
+        if (isStartReceTaxiInfo == NO)
+        {
+            //--------------------------Login
+            [self sendData:[OperateAgreement GetSearchTaxiDataWithLatitude:self.mapView.centerCoordinate.latitude
+                                                              andLongitude:self.mapView.centerCoordinate.longitude
+                                                                     range:[OperateAgreement Range]]];
+        }
     }
     else
     {
+        NSLog(@"invalidate");
         [theTimer invalidate];
+        theTimer = nil;
     }
-    
     trySearchTaxiCount ++;
 }
 
@@ -807,7 +834,7 @@ BOOL isTestCity = NO;
          if (placemarks.count > 0)
          {
              CLPlacemark * localCity = [placemarks objectAtIndex:0];
-             NSLog(@"%@",localCity.administrativeArea);
+             //NSLog(@"%@",localCity.administrativeArea);
              BOOL found = NO;
              NSArray *arrayOfStrings = [[NSArray alloc] initWithObjects:@"Anhui",@"安徽",@"Gansu",@"甘肃",
                                         @"Chongqing",@"重庆", @"Sichuan",@"四川",nil];
@@ -983,15 +1010,12 @@ static SystemSoundID soundIDTest = 0;
 {
     if (motion == UIEventSubtypeMotionShake)
     {
-        if (!isSearching)
-        {
+ 
             NSLog(@"Shake..........");
             
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             [self PlayShakeMusic];
             [self searchTaxi];
-            
-        }
         
     }
 }
