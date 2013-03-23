@@ -823,6 +823,8 @@ short receTaxiInfoCurrentPacIndex = -1;
 
 #pragma mark - CLLocationManagerDelegate Methods
 
+
+//-----在安徽、四川、等地方显示的公司名字不一样。
 BOOL isTestCity = NO;
 
 //获取位置信息
@@ -840,13 +842,23 @@ BOOL isTestCity = NO;
                                         @"Chongqing",@"重庆", @"Sichuan",@"四川",nil];
              for (NSString *s in arrayOfStrings)
              {
-                 if ([localCity.administrativeArea rangeOfString:s].location != NSNotFound) {
+                 if ([localCity.administrativeArea rangeOfString:s].location != NSNotFound)
+                 {
                      found = YES;
                      break;
                  }
              }
              isTestCity = found;
+             
+             //---用户第一次登录的时候默认值是九江市，如果获取到位置信息后，会自动切换到改城市。
+             if ([localCity.locality isEqualToString:@"武汉市"] || [localCity.locality isEqualToString:@"Wuhan"])
+             {
+                 [OperateAgreement SetServerCityName:@"武汉市"];
+             }
+             
          }
+         
+       
      }];
     
     [self.locationManager stopUpdatingLocation];

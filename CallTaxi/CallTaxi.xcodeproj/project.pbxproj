@@ -59,6 +59,14 @@
 		E529294216DB4F4D00F2D984 /* callTaxiRecord@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */; };
 		E529294316DB4F4D00F2D984 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529294016DB4F4D00F2D984 /* setting@2x.png */; };
 		E529294416DB4F4D00F2D984 /* taxi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E529294116DB4F4D00F2D984 /* taxi@2x.png */; };
+		E52977DD16FC50D700E7C1FF /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977D316FC50D700E7C1FF /* AGCommon.framework */; };
+		E52977DE16FC50D700E7C1FF /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E52977D416FC50D700E7C1FF /* ShareSDKLocalizable.strings */; };
+		E52977DF16FC50D700E7C1FF /* QQApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977D616FC50D700E7C1FF /* QQApi.framework */; };
+		E52977E016FC50D700E7C1FF /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E52977D716FC50D700E7C1FF /* Resource.bundle */; };
+		E52977E116FC50D700E7C1FF /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977D916FC50D700E7C1FF /* libWeChatSDK_armv7_armv7s.a */; };
+		E52977E216FC50D700E7C1FF /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977DC16FC50D700E7C1FF /* ShareSDK.framework */; };
+		E52977E416FC513F00E7C1FF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977E316FC513F00E7C1FF /* QuartzCore.framework */; };
+		E52977E616FC516500E7C1FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977E516FC516500E7C1FF /* libicucore.dylib */; };
 		E53ADEB316C7717F00CE8596 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = E53ADEB016C7717F00CE8596 /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E53ADEB416C7717F00CE8596 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = E53ADEB216C7717F00CE8596 /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E5417F4916C89DBC004CB781 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = E5417F4816C89DBC004CB781 /* NSData+Hex.m */; };
@@ -164,6 +172,16 @@
 		E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callTaxiRecord@2x.png"; sourceTree = "<group>"; };
 		E529294016DB4F4D00F2D984 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		E529294116DB4F4D00F2D984 /* taxi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "taxi@2x.png"; sourceTree = "<group>"; };
+		E52977D316FC50D700E7C1FF /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
+		E52977D516FC50D700E7C1FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShareSDKLocalizable.strings; sourceTree = "<group>"; };
+		E52977D616FC50D700E7C1FF /* QQApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQApi.framework; sourceTree = "<group>"; };
+		E52977D716FC50D700E7C1FF /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		E52977D916FC50D700E7C1FF /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
+		E52977DA16FC50D700E7C1FF /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		E52977DB16FC50D700E7C1FF /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		E52977DC16FC50D700E7C1FF /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
+		E52977E316FC513F00E7C1FF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E52977E516FC516500E7C1FF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E53ADEAF16C7717F00CE8596 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		E53ADEB016C7717F00CE8596 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		E53ADEB116C7717F00CE8596 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -195,7 +213,7 @@
 		E562169D16C3A88800950791 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		E562169F16C3A8D000950791 /* CallTaxiRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallTaxiRecordViewController.h; sourceTree = "<group>"; };
 		E56216A016C3A8D000950791 /* CallTaxiRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallTaxiRecordViewController.m; sourceTree = "<group>"; };
-		E567EBD816C110E900D2F0F2 /* CallTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallTaxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E567EBD816C110E900D2F0F2 /* 智能电召.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "智能电召.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E567EBDB16C110E900D2F0F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E567EBDD16C110E900D2F0F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E567EBDF16C110E900D2F0F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -226,6 +244,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E52977E616FC516500E7C1FF /* libicucore.dylib in Frameworks */,
+				E52977E416FC513F00E7C1FF /* QuartzCore.framework in Frameworks */,
 				E52302D216D8CD3F003A89B3 /* MessageUI.framework in Frameworks */,
 				E50FA98F16D7666B005FE832 /* AVFoundation.framework in Frameworks */,
 				E50FA98916D75626005FE832 /* AudioToolbox.framework in Frameworks */,
@@ -236,6 +256,10 @@
 				E567EBDC16C110E900D2F0F2 /* UIKit.framework in Frameworks */,
 				E567EBDE16C110E900D2F0F2 /* Foundation.framework in Frameworks */,
 				E567EBE016C110E900D2F0F2 /* CoreGraphics.framework in Frameworks */,
+				E52977DD16FC50D700E7C1FF /* AGCommon.framework in Frameworks */,
+				E52977DF16FC50D700E7C1FF /* QQApi.framework in Frameworks */,
+				E52977E116FC50D700E7C1FF /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
+				E52977E216FC50D700E7C1FF /* ShareSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +360,7 @@
 		E523665816C219A200463A4F /* HelpClass */ = {
 			isa = PBXGroup;
 			children = (
+				E52977D216FC50D700E7C1FF /* ShareSDK_v1.2.5 */,
 				E52302D316D8DB25003A89B3 /* SVWebViewController */,
 				E50FA97216D713AB005FE832 /* FileOperate */,
 				E51D93A016D5C6DB002986B4 /* TBXML */,
@@ -382,6 +407,29 @@
 				E529293716DB4EA200F2D984 /* taxi.png */,
 			);
 			name = TabImage;
+			sourceTree = "<group>";
+		};
+		E52977D216FC50D700E7C1FF /* ShareSDK_v1.2.5 */ = {
+			isa = PBXGroup;
+			children = (
+				E52977D316FC50D700E7C1FF /* AGCommon.framework */,
+				E52977D416FC50D700E7C1FF /* ShareSDKLocalizable.strings */,
+				E52977D616FC50D700E7C1FF /* QQApi.framework */,
+				E52977D716FC50D700E7C1FF /* Resource.bundle */,
+				E52977D816FC50D700E7C1FF /* SDKExport */,
+				E52977DC16FC50D700E7C1FF /* ShareSDK.framework */,
+			);
+			path = ShareSDK_v1.2.5;
+			sourceTree = "<group>";
+		};
+		E52977D816FC50D700E7C1FF /* SDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				E52977D916FC50D700E7C1FF /* libWeChatSDK_armv7_armv7s.a */,
+				E52977DA16FC50D700E7C1FF /* WXApi.h */,
+				E52977DB16FC50D700E7C1FF /* WXApiObject.h */,
+			);
+			path = SDKExport;
 			sourceTree = "<group>";
 		};
 		E53ADEAE16C7716200CE8596 /* MacAddressMd5Value */ = {
@@ -453,7 +501,7 @@
 		E567EBD916C110E900D2F0F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E567EBD816C110E900D2F0F2 /* CallTaxi.app */,
+				E567EBD816C110E900D2F0F2 /* 智能电召.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -461,6 +509,8 @@
 		E567EBDA16C110E900D2F0F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E52977E516FC516500E7C1FF /* libicucore.dylib */,
+				E52977E316FC513F00E7C1FF /* QuartzCore.framework */,
 				E52302D116D8CD3F003A89B3 /* MessageUI.framework */,
 				E50FA98E16D7666B005FE832 /* AVFoundation.framework */,
 				E50FA98816D75626005FE832 /* AudioToolbox.framework */,
@@ -545,9 +595,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E567EBD716C110E900D2F0F2 /* CallTaxi */ = {
+		E567EBD716C110E900D2F0F2 /* 智能电召 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "CallTaxi" */;
+			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */;
 			buildPhases = (
 				E567EBD416C110E900D2F0F2 /* Sources */,
 				E567EBD516C110E900D2F0F2 /* Frameworks */,
@@ -557,9 +607,9 @@
 			);
 			dependencies = (
 			);
-			name = CallTaxi;
+			name = "智能电召";
 			productName = CallTaxi;
-			productReference = E567EBD816C110E900D2F0F2 /* CallTaxi.app */;
+			productReference = E567EBD816C110E900D2F0F2 /* 智能电召.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -583,7 +633,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E567EBD716C110E900D2F0F2 /* CallTaxi */,
+				E567EBD716C110E900D2F0F2 /* 智能电召 */,
 			);
 		};
 /* End PBXProject section */
@@ -649,6 +699,8 @@
 				E5F257CF16E1B769005B1F5E /* Default-568h@2x.png in Resources */,
 				E5F257D016E1B769005B1F5E /* Default.png in Resources */,
 				E5F257D116E1B769005B1F5E /* Default@2x.png in Resources */,
+				E52977DE16FC50D700E7C1FF /* ShareSDKLocalizable.strings in Resources */,
+				E52977E016FC50D700E7C1FF /* Resource.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +742,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E52977D416FC50D700E7C1FF /* ShareSDKLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E52977D516FC50D700E7C1FF /* en */,
+			);
+			name = ShareSDKLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		E567EBE416C110E900D2F0F2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -732,6 +792,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -756,6 +817,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -768,10 +830,18 @@
 		E567EBFC16C110E900D2F0F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CallTaxi/ShareSDK_v1.2.5\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CallTaxi/CallTaxi-Prefix.pch";
 				INFOPLIST_FILE = "CallTaxi/CallTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CallTaxi/ShareSDK_v1.2.5/SDKExport\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -780,10 +850,18 @@
 		E567EBFD16C110E900D2F0F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CallTaxi/ShareSDK_v1.2.5\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CallTaxi/CallTaxi-Prefix.pch";
 				INFOPLIST_FILE = "CallTaxi/CallTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CallTaxi/ShareSDK_v1.2.5/SDKExport\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -801,7 +879,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "CallTaxi" */ = {
+		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E567EBFC16C110E900D2F0F2 /* Debug */,

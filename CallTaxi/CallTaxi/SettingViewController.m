@@ -7,6 +7,7 @@
 //
 
 #import <MessageUI/MFMailComposeViewController.h>
+#import <ShareSDK/ShareSDK.h>
 #import "SettingViewController.h"
 #import "SVWebViewController.h"
 #import "AsyncUdpSocket.h"
@@ -495,6 +496,39 @@ const int referrerAlertViewTextFieldTag =103;
     NSLog(@"socket closed!");
 }
 
+- (IBAction)ShareToSocial:(id)sender
+{
+    id<ISSPublishContent> publishContent = [ShareSDK publishContent:@"发现一款打车神器，欢迎大家来围观。#智能电召# https://itunes.apple.com/cn/app/calltaxi/id580047999"
+                                                     defaultContent:@""
+                                                              image:nil//[UIImage imageNamed:@"share11.jpg"]
+                                                       imageQuality:0
+                                                          mediaType:SSPublishContentMediaTypeText
+                                                              title:@"ShareSDK"
+                                                                url:@""
+                                                       musicFileUrl:nil
+                                                            extInfo:nil
+                                                           fileData:nil];
+    [ShareSDK showShareActionSheet:self
+                         shareList:nil
+                           content:publishContent
+                     statusBarTips:YES
+                   oneKeyShareList:[NSArray defaultOneKeyShareList]
+                          autoAuth:YES
+                        convertUrl:YES
+                    shareViewStyle:ShareViewStyleSimple
+                    shareViewTitle:@"内容分享"
+                            result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo>
+                                     statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                if (state == SSPublishContentStateSuccess)
+                                {
+                                    NSLog(@"分享成功!");
+                                }
+                                else if(state == SSPublishContentStateFail)
+                                {
+                                    NSLog(@"分享失败!");
+                                }
+                            }];
+}
 
 
 @end

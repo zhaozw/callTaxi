@@ -7,12 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import <ShareSDK/ShareSDK.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [ShareSDK registerApp:@"1364296b855"];
     return YES;
 }
 

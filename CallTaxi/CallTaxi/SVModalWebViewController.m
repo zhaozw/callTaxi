@@ -36,6 +36,11 @@
     return self;
 }
 
+- (void)doneButtonClicked:(id)sender
+{
+    NSLog(@"doneButtonClicked");
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:NO];
     
