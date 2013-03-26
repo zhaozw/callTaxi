@@ -213,7 +213,7 @@
 		E562169D16C3A88800950791 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		E562169F16C3A8D000950791 /* CallTaxiRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallTaxiRecordViewController.h; sourceTree = "<group>"; };
 		E56216A016C3A8D000950791 /* CallTaxiRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallTaxiRecordViewController.m; sourceTree = "<group>"; };
-		E567EBD816C110E900D2F0F2 /* 智能电召.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "智能电召.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E567EBD816C110E900D2F0F2 /* CallTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallTaxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E567EBDB16C110E900D2F0F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E567EBDD16C110E900D2F0F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E567EBDF16C110E900D2F0F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -501,7 +501,7 @@
 		E567EBD916C110E900D2F0F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E567EBD816C110E900D2F0F2 /* 智能电召.app */,
+				E567EBD816C110E900D2F0F2 /* CallTaxi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -595,9 +595,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E567EBD716C110E900D2F0F2 /* 智能电召 */ = {
+		E567EBD716C110E900D2F0F2 /* CallTaxi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */;
+			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "CallTaxi" */;
 			buildPhases = (
 				E567EBD416C110E900D2F0F2 /* Sources */,
 				E567EBD516C110E900D2F0F2 /* Frameworks */,
@@ -607,9 +607,9 @@
 			);
 			dependencies = (
 			);
-			name = "智能电召";
+			name = CallTaxi;
 			productName = CallTaxi;
-			productReference = E567EBD816C110E900D2F0F2 /* 智能电召.app */;
+			productReference = E567EBD816C110E900D2F0F2 /* CallTaxi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -633,7 +633,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E567EBD716C110E900D2F0F2 /* 智能电召 */,
+				E567EBD716C110E900D2F0F2 /* CallTaxi */,
 			);
 		};
 /* End PBXProject section */
@@ -879,7 +879,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */ = {
+		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "CallTaxi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E567EBFC16C110E900D2F0F2 /* Debug */,
