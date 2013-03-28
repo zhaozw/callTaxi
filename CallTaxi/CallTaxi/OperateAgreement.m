@@ -21,6 +21,7 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:taxiServerHost forKey:TAXI_SERVER_HOST];
+    [ud synchronize];
 }
 
 + (NSString *)TaxiServerHost
@@ -47,7 +48,8 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:phoneNumber forKey:USER_PHONENUMBER];
-    
+    [ud synchronize];
+
     //----when change ServerName  change taxiServerHost
     NSString *taxiServerHost = [self GetTaxiServerHostWithCityName:[self ServerCityName]];
     [self SetTaxiServerHost:taxiServerHost];
@@ -63,7 +65,9 @@
 + (void)SetServerCityName:(NSString *)cityName
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setValue:cityName forKey:SERVER_CITY_NAME];    
+    [ud setValue:cityName forKey:SERVER_CITY_NAME];
+    [ud synchronize];
+
     //----when change ServerName  change taxiServerHost
     NSString *taxiServerHost = [self GetTaxiServerHostWithCityName:cityName];
     [self SetTaxiServerHost:taxiServerHost];
@@ -105,6 +109,8 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:peopleName forKey:USER_REFERRER];
 
+    [ud synchronize];
+
 }
 
 + (NSString *)Referrer
@@ -118,6 +124,8 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:phoneNumber forKey:SERVER_PHONENUMBER];
+    [ud synchronize];
+
 }
 
 + (NSString *)ServerPhoneNumber
@@ -131,6 +139,8 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:range forKey:SEARCHTAXI_RANGE];
+    [ud synchronize];
+
 
 }
 

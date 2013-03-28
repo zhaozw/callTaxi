@@ -948,6 +948,8 @@ BOOL isTestCity = NO;
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         [ud setObject:[NSString stringWithFormat:@"%f",userLocation.coordinate.latitude] forKey:LAST_UESRLOCATION_LATITUDE];
         [ud setObject:[NSString stringWithFormat:@"%f",userLocation.coordinate.longitude] forKey:LAST_UESRLOCATION_LONGITUDE];
+        [ud synchronize];
+
     }
     if(getCurrentPostioning)
     {

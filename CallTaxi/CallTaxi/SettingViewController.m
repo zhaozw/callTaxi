@@ -496,6 +496,8 @@ const int referrerAlertViewTextFieldTag =103;
     NSLog(@"socket closed!");
 }
 
+#pragma mark - ShareSDK
+
 - (IBAction)ShareToSocial:(id)sender
 {
     id<ISSPublishContent> publishContent = [ShareSDK publishContent:@"发现一款打车神器，欢迎大家来围观。#智能电召# https://itunes.apple.com/cn/app/calltaxi/id580047999"

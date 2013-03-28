@@ -25,7 +25,7 @@ NSString *ssSinaRedirectUri = @"http://www.cityofcar.com/";
 
 NSString *ssTecentAppKey = @"801330910";
 NSString *ssTecentAppSecret = @"db59e4a1c57d6be21301f8537435da72";
-NSString *ssTecentRedirectUri = @"https://itunes.apple.com/cn/app/calltaxi/id580047999";
+NSString *ssTecentRedirectUri = @"http://www.cityofcar.com/";
 
 #pragma mark - QQ空间应用配置信息
 //http://connect.qq.com/intro/login/上申请加入QQ登录，并将相关信息填写到以下字段

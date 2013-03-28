@@ -519,37 +519,6 @@
         <image name="setting.png" width="30" height="30"/>
         <image name="taxi.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="CallTaxiRecordViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CallTaxiRecordViewController.h"/>
-        </class>
-        <class className="SearchBusViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchBusViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="SearchTaxiViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchTaxiViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="searchTaxiClick:"/>
-                <relationship kind="action" name="showUeserLocationOnMapView:"/>
-                <relationship kind="outlet" name="currentPostionButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="SettingViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="RangeSliderValueChange:" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="rangeLable" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rangeSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="TaxiListModeViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TaxiListModeViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
