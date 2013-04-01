@@ -595,9 +595,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E567EBD716C110E900D2F0F2 /* CallTaxi */ = {
+		E567EBD716C110E900D2F0F2 /* 智能电召 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "CallTaxi" */;
+			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */;
 			buildPhases = (
 				E567EBD416C110E900D2F0F2 /* Sources */,
 				E567EBD516C110E900D2F0F2 /* Frameworks */,
@@ -607,7 +607,7 @@
 			);
 			dependencies = (
 			);
-			name = CallTaxi;
+			name = "智能电召";
 			productName = CallTaxi;
 			productReference = E567EBD816C110E900D2F0F2 /* CallTaxi.app */;
 			productType = "com.apple.product-type.application";
@@ -633,7 +633,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E567EBD716C110E900D2F0F2 /* CallTaxi */,
+				E567EBD716C110E900D2F0F2 /* 智能电召 */,
 			);
 		};
 /* End PBXProject section */
@@ -879,7 +879,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "CallTaxi" */ = {
+		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E567EBFC16C110E900D2F0F2 /* Debug */,
