@@ -20,6 +20,12 @@
 @synthesize callTaxiRecordList = _callTaxiRecordList;
 
 
+
+const int licenseplatenumberTag = 100;
+const int phoneNumberTag = 101;
+const int timeTag = 102;
+const int callTaxiAlertViewTag = 100;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -86,10 +92,11 @@
     NSDictionary * recordDic = [self.callTaxiRecordList objectAtIndex:(self.callTaxiRecordList.count - 1 - indexPath.row)];
 
 
+
     {
-        UILabel *licenseplatenumber = (UILabel *)[cell viewWithTag:100];
-        UILabel *phoneNumber = (UILabel *)[cell viewWithTag:101];
-        UILabel *time = (UILabel *)[cell viewWithTag:102];
+        UILabel *licenseplatenumber = (UILabel *)[cell viewWithTag:licenseplatenumberTag];
+        UILabel *phoneNumber = (UILabel *)[cell viewWithTag:phoneNumberTag];
+        UILabel *time = (UILabel *)[cell viewWithTag:timeTag];
         
         licenseplatenumber.text = [NSString stringWithFormat:@"出租车牌照: %@",[recordDic valueForKey:Taxi_Record_TaxiNumber]];
         phoneNumber.text = [NSString stringWithFormat:@"司机号码: %@", [recordDic valueForKey:Taxi_Record_DriverPhoneNumber]];
@@ -121,7 +128,7 @@
                                delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
     
      //alertView.
-     alertView.tag = 100;
+     alertView.tag = callTaxiAlertViewTag;
      [alertView show];
     
 //    if (taxiInfo)
@@ -142,7 +149,7 @@
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag ==100 && buttonIndex == 0)
+    if (actionSheet.tag ==callTaxiAlertViewTag && buttonIndex == 0)
     {
         NSIndexPath *selectedRowIndex = [self.tableView indexPathForSelectedRow];
         NSDictionary *recordDic = [self.callTaxiRecordList objectAtIndex:selectedRowIndex.row];

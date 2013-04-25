@@ -56,7 +56,7 @@
         pickerView.showsSelectionIndicator = YES;
         pickerView.dataSource = self;
         pickerView.delegate = self;
-        pickerView.tag = 100;
+        pickerView.tag = pickerViewTag;
         [_serverCitySelectActionSheet addSubview:pickerView];
         
         UISegmentedControl *closeButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:@"确定"]];
@@ -103,6 +103,9 @@ const int phoneNumberAlertViewTextFieldTag =101;
 
 const int referrerAlertViewTag =102;
 const int referrerAlertViewTextFieldTag =103;
+
+
+const int pickerViewTag = 104;
 
 - (UIAlertView *)referrerAlertView
 {
@@ -236,7 +239,7 @@ const int referrerAlertViewTextFieldTag =103;
         {
             [self.serverCitySelectActionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
             [self.serverCitySelectActionSheet setBounds:CGRectMake(0, 0, 320, 485)];
-            UIPickerView *pickerView = (UIPickerView *)[self.serverCitySelectActionSheet viewWithTag:100];
+            UIPickerView *pickerView = (UIPickerView *)[self.serverCitySelectActionSheet viewWithTag:pickerViewTag];
             int value = [self.pickerData indexOfObject: [OperateAgreement ServerCityName]];
             [pickerView selectRow:value inComponent:0 animated:NO];
         }

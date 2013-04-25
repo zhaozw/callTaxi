@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E567EBD716C110E900D2F0F2"
-               BuildableName = "CallTaxi.app"
-               BlueprintName = "&#26234;&#33021;&#30005;&#21484;"
+               BuildableName = "&#25307;&#36710;&#29579;.app"
+               BlueprintName = "&#25307;&#36710;&#29579;"
                ReferencedContainer = "container:CallTaxi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E567EBD716C110E900D2F0F2"
-            BuildableName = "CallTaxi.app"
-            BlueprintName = "&#26234;&#33021;&#30005;&#21484;"
+            BuildableName = "&#25307;&#36710;&#29579;.app"
+            BlueprintName = "&#25307;&#36710;&#29579;"
             ReferencedContainer = "container:CallTaxi.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,8 +52,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E567EBD716C110E900D2F0F2"
-            BuildableName = "CallTaxi.app"
-            BlueprintName = "&#26234;&#33021;&#30005;&#21484;"
+            BuildableName = "&#25307;&#36710;&#29579;.app"
+            BlueprintName = "&#25307;&#36710;&#29579;"
             ReferencedContainer = "container:CallTaxi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,8 +70,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E567EBD716C110E900D2F0F2"
-            BuildableName = "CallTaxi.app"
-            BlueprintName = "&#26234;&#33021;&#30005;&#21484;"
+            BuildableName = "&#25307;&#36710;&#29579;.app"
+            BlueprintName = "&#25307;&#36710;&#29579;"
             ReferencedContainer = "container:CallTaxi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

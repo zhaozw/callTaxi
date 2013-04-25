@@ -165,7 +165,7 @@
 //    [SGInfoAlert showInfo:info
 //                  bgColor:[[UIColor darkGrayColor] CGColor]
 //                   inView:self.view
-//                 vertical:0.7];
+//                 vertical:0.6];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     

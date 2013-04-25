@@ -197,6 +197,31 @@
     return sendData;
 }
 
+
++ (NSData *)GetSearchCarDataWithLatitude:(double)latitude andLongitude:(double)longitude range:(Byte)range
+{
+    NSMutableData *searchTaxiData = [[NSMutableData alloc] init];
+    NSMutableData *bodyData = [[NSMutableData alloc] init];
+    
+    NSString *latitudeString = [[NSString stringWithFormat:@"%d",(int) (latitude * pow(10, 6))]
+                                stringByPaddingTheLeftToLength:10 withString:@"0" startingAtIndex:0];
+    NSString *longitudeString = [[NSString stringWithFormat:@"%d",(int) (longitude * pow(10, 6))]
+                                 stringByPaddingTheLeftToLength:10 withString:@"0" startingAtIndex:0];
+    
+    [bodyData appendData:[longitudeString hexToBytes]];
+    [bodyData appendData:[latitudeString hexToBytes]];
+    [bodyData appendBytes:&range length:sizeof(range)];
+
+    Byte type = 3;
+    [bodyData appendBytes:&type length:sizeof(type)];
+
+    NSData *messageHead =[self GetMessageHeadWhitPhoneNumber:[self UserPhoneNumber] andMessageID:MESSAGE_ID_SEARCHCAR andMessageBodyLength:bodyData.length];
+    [searchTaxiData appendData:messageHead];
+    [searchTaxiData appendData:bodyData];
+    NSData *sendData = [self PackageSendData:searchTaxiData];
+    return sendData;
+}
+
 + (NSData *)GetAllBusData
 {
     NSData *messageHead = [self GetMessageHeadWhitPhoneNumber:[OperateAgreement UserPhoneNumber] andMessageID:MESSAGE_ID_GetAllBus andMessageBodyLength:0];

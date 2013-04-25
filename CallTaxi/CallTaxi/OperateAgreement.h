@@ -23,7 +23,8 @@
 #define MESSAGE_ID_GetAllBus_REPLY       @"8001"
 #define MESSAGE_ID_UpdataReferrer        @"0025"
 #define MESSAGE_ID_UpdataReferrer_REPLY  @"8025"
-
+#define MESSAGE_ID_SEARCHCAR             @"0038"
+#define MESSAGE_ID_SEARCHCAR_REPLY       @"8038"
 
 //----------Config
 #define TAXI_SERVER_HOST                 @"TAXI_SERVER_HOST"
@@ -68,6 +69,9 @@
 + (NSData *)GetLoginData;
 
 + (NSData *)GetSearchTaxiDataWithLatitude:(double)latitude andLongitude:(double)longitude range:(Byte)range;
+
++ (NSData *)GetSearchCarDataWithLatitude:(double)latitude andLongitude:(double)longitude range:(Byte)range;
+
 
 + (NSData *)GetAllBusData;
 

@@ -20,6 +20,8 @@
 		E5085C8516D38592009FDB47 /* 074.png in Resources */ = {isa = PBXBuildFile; fileRef = E5085C7D16D38592009FDB47 /* 074.png */; };
 		E5085C8616D38592009FDB47 /* 084.png in Resources */ = {isa = PBXBuildFile; fileRef = E5085C7E16D38592009FDB47 /* 084.png */; };
 		E5085C8716D38592009FDB47 /* 094.png in Resources */ = {isa = PBXBuildFile; fileRef = E5085C7F16D38592009FDB47 /* 094.png */; };
+		E50D47ED171BDB90005A6703 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = E50D47EB171BDB90005A6703 /* car.png */; };
+		E50D47EE171BDB90005A6703 /* car@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50D47EC171BDB90005A6703 /* car@2x.png */; };
 		E50FA97516D713C7005FE832 /* fileOperate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50FA97416D713C7005FE832 /* fileOperate.m */; };
 		E50FA97F16D75118005FE832 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = E50FA97616D75118005FE832 /* 1.png */; };
 		E50FA98016D75118005FE832 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = E50FA97716D75118005FE832 /* 2.png */; };
@@ -67,6 +69,9 @@
 		E52977E216FC50D700E7C1FF /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977DC16FC50D700E7C1FF /* ShareSDK.framework */; };
 		E52977E416FC513F00E7C1FF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977E316FC513F00E7C1FF /* QuartzCore.framework */; };
 		E52977E616FC516500E7C1FF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E52977E516FC516500E7C1FF /* libicucore.dylib */; };
+		E53490AE172761E3005223D3 /* SearchCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53490AD172761E3005223D3 /* SearchCarViewController.m */; };
+		E53490B117276D4B005223D3 /* CarInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E53490B017276D4A005223D3 /* CarInfo.m */; };
+		E53490B41727B6F8005223D3 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = E53490B31727B6F8005223D3 /* test.m */; };
 		E53ADEB316C7717F00CE8596 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = E53ADEB016C7717F00CE8596 /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E53ADEB416C7717F00CE8596 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = E53ADEB216C7717F00CE8596 /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E5417F4916C89DBC004CB781 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = E5417F4816C89DBC004CB781 /* NSData+Hex.m */; };
@@ -124,6 +129,8 @@
 		E5085C7D16D38592009FDB47 /* 074.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 074.png; sourceTree = "<group>"; };
 		E5085C7E16D38592009FDB47 /* 084.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 084.png; sourceTree = "<group>"; };
 		E5085C7F16D38592009FDB47 /* 094.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 094.png; sourceTree = "<group>"; };
+		E50D47EB171BDB90005A6703 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		E50D47EC171BDB90005A6703 /* car@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car@2x.png"; sourceTree = "<group>"; };
 		E50FA97316D713C7005FE832 /* fileOperate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileOperate.h; sourceTree = "<group>"; };
 		E50FA97416D713C7005FE832 /* fileOperate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileOperate.m; sourceTree = "<group>"; };
 		E50FA97616D75118005FE832 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -182,6 +189,12 @@
 		E52977DC16FC50D700E7C1FF /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		E52977E316FC513F00E7C1FF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E52977E516FC516500E7C1FF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		E53490AC172761E3005223D3 /* SearchCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCarViewController.h; sourceTree = "<group>"; };
+		E53490AD172761E3005223D3 /* SearchCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCarViewController.m; sourceTree = "<group>"; };
+		E53490AF17276D4A005223D3 /* CarInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfo.h; sourceTree = "<group>"; };
+		E53490B017276D4A005223D3 /* CarInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfo.m; sourceTree = "<group>"; };
+		E53490B21727B6F8005223D3 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		E53490B31727B6F8005223D3 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		E53ADEAF16C7717F00CE8596 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		E53ADEB016C7717F00CE8596 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		E53ADEB116C7717F00CE8596 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -213,7 +226,7 @@
 		E562169D16C3A88800950791 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		E562169F16C3A8D000950791 /* CallTaxiRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallTaxiRecordViewController.h; sourceTree = "<group>"; };
 		E56216A016C3A8D000950791 /* CallTaxiRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallTaxiRecordViewController.m; sourceTree = "<group>"; };
-		E567EBD816C110E900D2F0F2 /* CallTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallTaxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E567EBD816C110E900D2F0F2 /* 招车王.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "招车王.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E567EBDB16C110E900D2F0F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E567EBDD16C110E900D2F0F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E567EBDF16C110E900D2F0F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -297,12 +310,16 @@
 			children = (
 				E517853D16D240B00017ECA2 /* TaxiInfo.h */,
 				E517853E16D240B00017ECA2 /* TaxiInfo.m */,
+				E53490AF17276D4A005223D3 /* CarInfo.h */,
+				E53490B017276D4A005223D3 /* CarInfo.m */,
 				E51D93E216D62F17002986B4 /* BusInfo.h */,
 				E51D93E316D62F17002986B4 /* BusInfo.m */,
 				E51D939B16D5C02A002986B4 /* BusStationInfo.h */,
 				E51D939C16D5C02A002986B4 /* BusStationInfo.m */,
 				E51D93B916D5E43B002986B4 /* CustomAnnotationView.h */,
 				E51D93BA16D5E43B002986B4 /* CustomAnnotationView.m */,
+				E53490B21727B6F8005223D3 /* test.h */,
+				E53490B31727B6F8005223D3 /* test.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -397,6 +414,8 @@
 		E529293E16DB4F1B00F2D984 /* TabImage */ = {
 			isa = PBXGroup;
 			children = (
+				E50D47EB171BDB90005A6703 /* car.png */,
+				E50D47EC171BDB90005A6703 /* car@2x.png */,
 				E529293F16DB4F4D00F2D984 /* callTaxiRecord@2x.png */,
 				E529294016DB4F4D00F2D984 /* setting@2x.png */,
 				E529294116DB4F4D00F2D984 /* taxi@2x.png */,
@@ -501,7 +520,7 @@
 		E567EBD916C110E900D2F0F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E567EBD816C110E900D2F0F2 /* CallTaxi.app */,
+				E567EBD816C110E900D2F0F2 /* 招车王.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -537,6 +556,8 @@
 				E59EC31616C8E74A007B9272 /* OperateAgreement.m */,
 				E567EC0116C1271A00D2F0F2 /* SearchTaxiViewController.h */,
 				E567EC0216C1271A00D2F0F2 /* SearchTaxiViewController.m */,
+				E53490AC172761E3005223D3 /* SearchCarViewController.h */,
+				E53490AD172761E3005223D3 /* SearchCarViewController.m */,
 				E506DF0016D4AECB0019E32A /* TaxiListModeViewController.h */,
 				E506DF0116D4AECB0019E32A /* TaxiListModeViewController.m */,
 				E562167C16C37A1D00950791 /* SearchBusViewController.h */,
@@ -595,9 +616,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E567EBD716C110E900D2F0F2 /* 智能电召 */ = {
+		E567EBD716C110E900D2F0F2 /* 招车王 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */;
+			buildConfigurationList = E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "招车王" */;
 			buildPhases = (
 				E567EBD416C110E900D2F0F2 /* Sources */,
 				E567EBD516C110E900D2F0F2 /* Frameworks */,
@@ -607,9 +628,9 @@
 			);
 			dependencies = (
 			);
-			name = "智能电召";
+			name = "招车王";
 			productName = CallTaxi;
-			productReference = E567EBD816C110E900D2F0F2 /* CallTaxi.app */;
+			productReference = E567EBD816C110E900D2F0F2 /* 招车王.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -633,7 +654,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E567EBD716C110E900D2F0F2 /* 智能电召 */,
+				E567EBD716C110E900D2F0F2 /* 招车王 */,
 			);
 		};
 /* End PBXProject section */
@@ -701,6 +722,8 @@
 				E5F257D116E1B769005B1F5E /* Default@2x.png in Resources */,
 				E52977DE16FC50D700E7C1FF /* ShareSDKLocalizable.strings in Resources */,
 				E52977E016FC50D700E7C1FF /* Resource.bundle in Resources */,
+				E50D47ED171BDB90005A6703 /* car.png in Resources */,
+				E50D47EE171BDB90005A6703 /* car@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +759,9 @@
 				E50FA97516D713C7005FE832 /* fileOperate.m in Sources */,
 				E52302D916D8DB32003A89B3 /* SVModalWebViewController.m in Sources */,
 				E52302DB16D8DB32003A89B3 /* SVWebViewController.m in Sources */,
+				E53490AE172761E3005223D3 /* SearchCarViewController.m in Sources */,
+				E53490B117276D4B005223D3 /* CarInfo.m in Sources */,
+				E53490B41727B6F8005223D3 /* test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,7 +905,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "智能电召" */ = {
+		E567EBFB16C110E900D2F0F2 /* Build configuration list for PBXNativeTarget "招车王" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E567EBFC16C110E900D2F0F2 /* Debug */,

@@ -37,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjP-za-ixJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3511" y="-1755"/>
+            <point key="canvasLocation" x="-3543" y="-2555"/>
         </scene>
         <!--Taxi List Mode View Controller-->
         <scene sceneID="avX-RS-PUe">
@@ -104,7 +104,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E7H-gW-oZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3027" y="-1765"/>
+            <point key="canvasLocation" x="-3029" y="-2565"/>
         </scene>
         <!--Search Bus View Controller - 查公交-->
         <scene sceneID="Jha-OD-RgG">
@@ -134,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwm-kj-d3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3520" y="-1158"/>
+            <point key="canvasLocation" x="-3511" y="-1838"/>
         </scene>
         <!--Call Taxi Record View Controller - 招车记录-->
         <scene sceneID="G77-Zl-Ujc">
@@ -428,19 +428,20 @@
                     <connections>
                         <segue destination="6dO-Ls-UED" kind="relationship" relationship="viewControllers" id="txw-Di-3rg"/>
                         <segue destination="N2O-Ov-Peb" kind="relationship" relationship="viewControllers" id="9SH-tM-7cf"/>
-                        <segue destination="td6-ZE-Kuk" kind="relationship" relationship="viewControllers" id="BIh-HV-5hi"/>
-                        <segue destination="LUH-zX-Q4h" kind="relationship" relationship="viewControllers" id="hb7-P4-18A"/>
+                        <segue destination="Xmc-ng-F7Z" kind="relationship" relationship="viewControllers" id="ViN-75-ECe"/>
+                        <segue destination="td6-ZE-Kuk" kind="relationship" relationship="viewControllers" id="bkK-uD-Dak"/>
+                        <segue destination="LUH-zX-Q4h" kind="relationship" relationship="viewControllers" id="3gt-bm-Rgl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KRW-Bt-69i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4758" y="-864"/>
+            <point key="canvasLocation" x="-6325" y="-1595"/>
         </scene>
         <!--Navigation Controller - 查出租车-->
         <scene sceneID="7qP-NN-v1n">
             <objects>
                 <navigationController id="6dO-Ls-UED" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="查出租车" image="taxi.png" id="Xdr-va-7s5"/>
+                    <tabBarItem key="tabBarItem" title="查出租车" image="car.png" id="Xdr-va-7s5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="np4-rO-I6o">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -453,7 +454,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTN-XM-10k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4052" y="-1755"/>
+            <point key="canvasLocation" x="-4054" y="-2555"/>
         </scene>
         <!--Navigation Controller - 查公交-->
         <scene sceneID="3MQ-CR-V1y">
@@ -472,7 +473,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhY-9v-Djm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4046" y="-1158"/>
+            <point key="canvasLocation" x="-4037" y="-1838"/>
         </scene>
         <!--Navigation Controller - 招车记录-->
         <scene sceneID="7ED-q8-xhW">
@@ -512,10 +513,60 @@
             </objects>
             <point key="canvasLocation" x="-4046" y="159"/>
         </scene>
+        <!--Search Car View Controller - 找顺风车-->
+        <scene sceneID="aAn-eT-VhT">
+            <objects>
+                <viewController id="eKn-7z-aGS" customClass="SearchCarViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WGp-UV-Vn6">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="eKU-6X-1Mo">
+                                <rect key="frame" x="0.0" y="-5" width="320" height="412"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="找顺风车" id="gJW-2a-GK9">
+                        <barButtonItem key="leftBarButtonItem" title="搜车" id="xco-Kk-QFo">
+                            <connections>
+                                <action selector="searchCar:" destination="eKn-7z-aGS" id="I8W-p1-YqC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="eKU-6X-1Mo" id="JcG-or-EeU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mc9-ay-IdZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3476" y="-1180"/>
+        </scene>
+        <!--Navigation Controller - 顺风车-->
+        <scene sceneID="MC8-Mu-Gzq">
+            <objects>
+                <navigationController id="Xmc-ng-F7Z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="顺风车" image="taxi.png" id="z5P-Wa-ael"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VTh-zp-IW0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eKn-7z-aGS" kind="relationship" relationship="rootViewController" id="RAQ-6c-On9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S3G-GT-T0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4016" y="-1167"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bus.png" width="30" height="30"/>
         <image name="callTaxiRecord.png" width="30" height="30"/>
+        <image name="car.png" width="30" height="30"/>
         <image name="setting.png" width="30" height="30"/>
         <image name="taxi.png" width="30" height="30"/>
     </resources>

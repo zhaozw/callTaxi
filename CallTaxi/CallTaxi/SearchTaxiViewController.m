@@ -67,8 +67,10 @@
 #pragma mark - property
 
 
-//const int phoneNumberAlertViewTag = 100;
-//const int isCalledTaxiPhoneTag = 101;
+
+const int stPhoneNumberAlertViewTag = 100;
+const int isCalledTaxiPhoneTag = 101;
+const int phoneNumberTextFieldTag = 102;
 
 - (NSTimer *)searchTaxiTimer
 {
@@ -128,9 +130,9 @@
         _phoneNumberAlertView = [[UIAlertView alloc] initWithTitle:@"请输入本机号码" message:nil delegate:self
                                                  cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         _phoneNumberAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        _phoneNumberAlertView.tag = 100;//phoneNumberAlertViewTag;
+        _phoneNumberAlertView.tag = stPhoneNumberAlertViewTag;
         UITextField *textField = [_phoneNumberAlertView textFieldAtIndex:0];
-        textField.tag = 101;
+        textField.tag = phoneNumberTextFieldTag;
         textField.keyboardType = UIKeyboardTypeNumberPad;
         [_phoneNumberAlertView addSubview:textField];
     }
@@ -198,7 +200,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:info
                                                            delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
         
-        alertView.tag = 101;//isCalledTaxiPhoneTag;
+        alertView.tag = isCalledTaxiPhoneTag;
         [alertView show];
     }
 }
@@ -304,10 +306,10 @@
     //---------Log
     NSString *info = [NSString stringWithFormat:@"host: %@,port : %hu",host,port];
     NSLog(@"%@",info);
-    //    [SGInfoAlert showInfo:info
-    //                  bgColor:[[UIColor darkGrayColor] CGColor]
-    //                   inView:self.view
-    //                 vertical:0.7];
+//    [SGInfoAlert showInfo:info
+//                  bgColor:[[UIColor darkGrayColor] CGColor]
+//                   inView:self.view
+//                 vertical:0.6];
     //启动监听下一条消息
     [self.socket receiveWithTimeout:-1 tag:0];
     
@@ -676,15 +678,16 @@ short receTaxiInfoCurrentPacIndex = -1;
     
     
 }
+
 #pragma mark  AlertView
 
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag == 100 && buttonIndex == 0)
+    if (actionSheet.tag == stPhoneNumberAlertViewTag && buttonIndex == 0)
     {
         // ok button
-        UITextField *textField = (UITextField *)[actionSheet viewWithTag:101];
+        UITextField *textField = (UITextField *)[actionSheet viewWithTag:phoneNumberTextFieldTag];
         NSString *phoneNumber = textField.text;
         NSLog(@"%@",phoneNumber);
         if ([Common isMobileNumber:phoneNumber])
@@ -702,7 +705,7 @@ short receTaxiInfoCurrentPacIndex = -1;
         }
     }
     
-    if (actionSheet.tag == 101 && buttonIndex == 1)
+    if (actionSheet.tag == isCalledTaxiPhoneTag && buttonIndex == 1)
     {
         if (didSelectTaxiInfo != nil)
         {
