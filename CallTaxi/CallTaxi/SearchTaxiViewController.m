@@ -146,6 +146,8 @@ const int phoneNumberTextFieldTag = 102;
     
     [super viewDidLoad];
     
+    //self.tabBarController.tabBarItem
+
     
     [self InitializationConfig];
     isGetUserLocation = NO;
@@ -606,6 +608,7 @@ short receTaxiInfoCurrentPacIndex = -1;
 
 - (void)searchTaxi
 {
+    
     if (isSearching)
     {
         [SGInfoAlert showInfo:@"请稍后在搜索。。。。" bgColor:[[UIColor darkGrayColor] CGColor]
@@ -858,6 +861,15 @@ BOOL isTestCity = NO;
              {
                  [OperateAgreement SetServerCityName:@"武汉市"];
              }
+             
+             
+             if (!([localCity.locality isEqualToString:@"九江市"] || [localCity.locality isEqualToString:@"Jiujiang"]))
+             {
+                 NSMutableArray *tabbarViewControllers = [NSMutableArray arrayWithArray: [self.tabBarController viewControllers]];
+                 [tabbarViewControllers removeObjectAtIndex:1];
+                 [self.tabBarController setViewControllers: tabbarViewControllers ];
+             }
+          
              
          }
          

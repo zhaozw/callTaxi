@@ -863,7 +863,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CallTaxi/CallTaxi-Prefix.pch";
 				INFOPLIST_FILE = "CallTaxi/CallTaxi-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/CallTaxi/ShareSDK_v1.2.5/SDKExport\"",
@@ -883,7 +883,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CallTaxi/CallTaxi-Prefix.pch";
 				INFOPLIST_FILE = "CallTaxi/CallTaxi-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/CallTaxi/ShareSDK_v1.2.5/SDKExport\"",
